@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Last Sunny Day — L'ultimo Giorno di Sole</title>
+<link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin>
+<style>
+@font-face {
+  font-family: "Daito Heading";
+  src: url("Last%20Sunny%20Day_files/Font/daito/Daito-NormalRegular.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Daito Body";
+  src: url("Last%20Sunny%20Day_files/Font/daito/Daito-NormalThin.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { overflow-x: hidden; }
+figure, figcaption { margin: 0; }
+body {
+  background: #fff;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; height: auto; }
+
+/* ---------- Header ---------- */
+.header {
+  padding: 14.5vw 0 0;
+  text-align: center;
+}
+
+.header__credit img { width: 16vw; margin: 0 auto; }
+.header__title  img { width: 53vw; margin: 3.2vw auto 0; }
+.header__subtitle img { width: 22vw; margin: 4.2vw auto 0; }
+
+.header__logline {
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 2.05vw;
+  line-height: 1.28;
+  text-align: left;
+  max-width: 62vw;
+  margin: 10vw 0 0 18.5vw;
+  letter-spacing: 0;
+}
+
+.header__still {
+  margin: 8vw auto 0;
+  width: 100%;
+  max-width: 1560px;
+}
+
+
+/* ---------- Editorial text sections ---------- */
+.prose {
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  margin: 0 auto;
+  padding: 9vw 0 0;
+  width: 63vw;
+  margin-left: 18.5vw;
+}
+
+.prose__heading {
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1.55vw;
+  line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin: 0 0 2.6vw;
+}
+
+.prose p {
+  font-weight: 400;
+  font-size: 1.55vw;
+  line-height: 1.52;
+  margin: 0 0 1.9vw;
+  max-width: 46vw;
+}
+
+.prose p:last-child { margin-bottom: 0; }
+
+.prose + .prose { padding-top: 7vw; }
+
+
+/* ---------- Reference video reel ---------- */
+.reel { margin-top: 9vw; }
+
+.reel__item {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+
+.reel__item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.reel__caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 2.05vw;
+  line-height: 1;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0 6vw;
+}
+
+
+/* ---------- Cast ---------- */
+.cast { padding-top: 9vw; }
+
+.cast__member {
+  margin-left: 18.5vw;
+  padding-bottom: 9vw;
+}
+
+.cast__portrait {
+  width: 15vw;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin: 0 0 4.6vw;
+}
+
+.cast__role {
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1.55vw;
+  line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin: 0 0 2.6vw;
+}
+
+.cast__member p {
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1.55vw;
+  line-height: 1.52;
+  margin: 0 0 1.9vw;
+  max-width: 46vw;
+}
+
+.cast__status {
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  font-size: 1.55vw;
+  line-height: 1.52;
+  margin: 4.4vw 0 0;
+}
+
+.cast__status--attached {
+  color: #c1553c;
+  text-decoration: underline;
+  text-underline-offset: .12em;
+  transition: opacity .2s ease;
+}
+
+.cast__status--attached:hover { opacity: .65; }
+
+
+/* ---------- Greek Elvis ---------- */
+.elvis { margin-top: 9vw; }
+
+.elvis__stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+}
+
+.elvis__stage iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  transform: translate(-50%, -50%) scale(1.3);
+  transform-origin: center center;
+}
+
+/* Centred "watch" overlay */
+.elvis__watch {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 2.05vw;
+  line-height: 1;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: opacity .35s ease;
+}
+
+.elvis.is-playing .elvis__watch { opacity: 0; pointer-events: none; }
+
+/* Custom control bar */
+.elvis__controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.6vw;
+  padding: 1.6vw 2.4vw;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.elvis.is-playing .elvis__controls,
+.elvis__stage:hover .elvis__controls { opacity: 1; }
+
+.elvis__toggle {
+  flex: none;
+  position: relative;
+  width: 1.15vw;
+  height: 1.35vw;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Play triangle */
+.elvis__toggle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+/* Pause bars */
+.elvis__toggle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(#fff, #fff) left / 32% 100% no-repeat,
+    linear-gradient(#fff, #fff) right / 32% 100% no-repeat;
+  opacity: 0;
+}
+
+.elvis.is-playing .elvis__toggle::before { opacity: 0; }
+.elvis.is-playing .elvis__toggle::after  { opacity: 1; }
+
+.elvis__track {
+  flex: 1;
+  position: relative;
+  height: 1.2vw;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.elvis__track::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,.45);
+}
+
+.elvis__progress {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 1px;
+  background: #fff;
+  width: 0;
+  pointer-events: none;
+}
+
+
+/* ---------- Soundtrack ---------- */
+.soundtrack {
+  padding: 9vw 6vw;
+  text-align: center;
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+}
+
+.soundtrack__heading {
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1.55vw;
+  line-height: 1.3;
+  margin: 0 0 3.2vw;
+}
+
+.soundtrack__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.soundtrack__list li { margin: 0 0 1.9vw; }
+.soundtrack__list li:last-child { margin-bottom: 0; }
+
+.soundtrack__list a {
+  font-size: 1.55vw;
+  line-height: 1.3;
+  color: #000;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+
+.soundtrack__list a:hover {
+  color: #c1553c;
+  text-decoration: underline;
+  text-underline-offset: .12em;
+}
+
+
+/* ---------- Reference gallery ---------- */
+.gallery {
+  background: #fff;
+  padding: 9vw 0 0;
+}
+
+.gallery__grid {
+  column-count: 6;
+  column-gap: 10px;
+  padding: 0 10px;
+}
+
+.gallery--full .gallery__grid { column-count: 1; column-gap: 0; padding: 0; }
+.gallery--grid .gallery__grid { column-count: 3; }
+
+.gallery__grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 10px;
+}
+
+.gallery--full .gallery__grid img { margin-bottom: 0; }
+
+/* Sticky state switcher */
+.gallery__nav {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: end;
+  background: #000;
+  padding: 1.1vw 2.2vw;
+  margin-top: 10px;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: .78vw;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.gallery__nav button,
+.gallery__nav a {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  text-decoration: none;
+  color: #6e6e6e;
+  cursor: pointer;
+  transition: color .2s ease;
+}
+
+.gallery__nav button:hover,
+.gallery__nav a:hover { color: #b8b8b8; }
+
+.gallery__nav [aria-pressed="true"] { color: #fff; }
+
+.gallery__nav-left  { justify-self: start;  text-align: left; }
+.gallery__nav-mid   { justify-self: center; text-align: center; }
+.gallery__nav-right { justify-self: end;    text-align: right; }
+
+.gallery__top { margin-bottom: .55vw; }
+
+
+/* ---------- Scroll reveals ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .9s cubic-bezier(.22,1,.36,1),
+              transform .9s cubic-bezier(.22,1,.36,1);
+}
+
+.reveal.is-inview { opacity: 1; transform: none; }
+
+/* Line-by-line body copy */
+.ln { display: block; overflow: hidden; }
+
+.ln__i {
+  display: block;
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform .85s cubic-bezier(.22,1,.36,1),
+              opacity .85s cubic-bezier(.22,1,.36,1);
+}
+
+.is-inview .ln__i { transform: none; opacity: 1; }
+
+/* Gallery image reveal + hover */
+.gallery__grid img {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .8s cubic-bezier(.22,1,.36,1),
+              transform .8s cubic-bezier(.22,1,.36,1);
+  cursor: pointer;
+}
+
+.gallery__grid img.is-inview { opacity: 1; transform: none; }
+
+.gallery--gallery .gallery__grid img.is-inview:hover,
+.gallery--grid    .gallery__grid img.is-inview:hover { opacity: .8; }
+
+.gallery--full .gallery__grid img { cursor: default; }
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.92);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .35s ease, visibility .35s;
+}
+
+.lightbox.is-open { opacity: 1; visibility: visible; }
+
+.lightbox[hidden] { display: none; }
+
+.lightbox img {
+  max-width: 92vw;
+  max-height: 88vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transform: scale(.97);
+  transition: transform .35s cubic-bezier(.22,1,.36,1);
+}
+
+.lightbox.is-open img { transform: none; }
+
+.lightbox__close {
+  position: absolute;
+  top: 2vw;
+  right: 2.4vw;
+  width: 2.2vw;
+  height: 2.2vw;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.lightbox__close::before,
+.lightbox__close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #fff;
+  transition: background .2s ease;
+}
+
+.lightbox__close::before { transform: rotate(45deg); }
+.lightbox__close::after  { transform: rotate(-45deg); }
+.lightbox__close:hover::before,
+.lightbox__close:hover::after { background: #c1553c; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .ln__i, .gallery__grid img, .lightbox, .lightbox img {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .lightbox { visibility: hidden; }
+  .lightbox.is-open { visibility: visible; }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 767px) {
+  .header { padding-top: 28vw; }
+  .header__credit img { width: 46vw; }
+  .header__title  img { width: 82vw; margin-top: 8vw; }
+  .header__subtitle img { width: 56vw; margin-top: 10vw; }
+  .header__logline {
+    font-size: 5vw;
+    max-width: none;
+    margin: 20vw 8vw 0;
+  }
+  .header__still { margin-top: 18vw; }
+
+  .prose { width: auto; margin-left: 0; padding: 20vw 8vw 0; }
+  .prose + .prose { padding-top: 16vw; }
+  .prose__heading { font-size: 4.4vw; margin-bottom: 7vw; }
+  .prose p { font-size: 4.4vw; margin-bottom: 5.5vw; max-width: none; }
+
+  .reel { margin-top: 20vw; }
+  .reel__caption { font-size: 5.4vw; }
+
+  .cast { padding-top: 20vw; }
+  .cast__member { margin-left: 0; padding: 0 8vw 20vw; }
+  .cast__portrait { width: 46vw; margin-bottom: 12vw; }
+  .cast__role { font-size: 4.4vw; margin-bottom: 7vw; }
+  .cast__member p { font-size: 4.4vw; margin-bottom: 5.5vw; max-width: none; }
+  .cast__status { font-size: 4.4vw; margin-top: 10vw; }
+
+  .elvis { margin-top: 20vw; }
+  .elvis__watch { font-size: 5.4vw; }
+  .elvis__controls { gap: 4vw; padding: 4vw 5vw; opacity: 1; }
+  .elvis__toggle { width: 3.4vw; height: 4vw; }
+  .elvis__track { height: 4vw; }
+
+  .soundtrack { padding: 20vw 8vw; }
+  .soundtrack__heading { font-size: 4.4vw; margin-bottom: 9vw; }
+  .soundtrack__list li { margin-bottom: 5.5vw; }
+  .soundtrack__list a { font-size: 4.4vw; }
+
+  .gallery { padding-top: 20vw; }
+  .gallery__grid { column-count: 2; column-gap: 6px; padding: 0 6px; }
+  .gallery--grid .gallery__grid { column-count: 2; }
+  .gallery__grid img { margin-bottom: 6px; }
+  .gallery__nav { padding: 3.5vw 5vw; font-size: 2.8vw; }
+  .gallery__top { margin-bottom: 1.8vw; }
+
+  .lightbox img { max-width: 94vw; max-height: 84vh; }
+  .lightbox__close { top: 5vw; right: 6vw; width: 6vw; height: 6vw; }
+
+
+
+
+
+
+
+}
+</style>
+</head>
+<body id="top">
+
+<figure class="header">
+  <div class="header__credit">
+    <img src="Last Sunny Day_files/Header/1.png" width="868" height="284" alt="A film by Goulielmos Derman">
+  </div>
+
+  <h1 class="header__title" style="margin:0">
+    <img src="Last Sunny Day_files/Header/2.png" width="1422" height="434" alt="Last Sunny Day">
+  </h1>
+
+  <div class="header__subtitle">
+    <img src="Last Sunny Day_files/Header/3.png" width="756" height="388" alt="L'ultimo Giorno di Sole">
+  </div>
+
+  <p class="header__logline">
+    On a sun-scorched Greek island, two Sicilian hitmen on a mission
+    are forced to face their violent past and uncertain future when
+    they cross paths with a woman with a vendetta of her own.
+  </p>
+
+  <div class="header__still">
+    <img src="Last Sunny Day_files/Header/header-image-post-title.png" width="1560" height="1552" alt="Last Sunny Day — still">
+  </div>
+</figure>
+
+<section class="prose">
+  <h2 class="prose__heading">Make it personal</h2>
+  <p>Growing up, I spent my days on the street, at parks and beaches, making short action films with my friends, playing with toy guns, cycling around town, and falling in love for the first time. We were young and free, and I try to carry that freedom as much as I can in my stories and my characters.</p>
+  <p>I grew up renting DVDs with my dad at the local video club. My parents took me to the cinema to watch every kind of movie, but the film that changed everything was "The Hateful Eight" in 2015. I was 15 years old and had already been making short films with my best friends. That day, I decided to take myself seriously.</p>
+  <p>Since then, I&rsquo;ve had a soft spot for crime and action cinema. It&rsquo;s a genre that speaks to me deeply, but it&rsquo;s also one that&rsquo;s been fading, especially in Greece.</p>
+  <p>That&rsquo;s why I&rsquo;m making the film I want to see on the big screen. Gritty, emotional, thrilling, and personal.</p>
+</section>
+
+<section class="prose">
+  <h2 class="prose__heading">Inspiration</h2>
+  <p>What draws me to this film is the stories of childhood friendship and nostalgia, like those in Spielberg&rsquo;s work. I&rsquo;m equally inspired by the romance and rebellion of Jean-Luc Godard, the poetic sadness of Kieslowski and Theo Angelopoulos, and the explosive violence of John Woo and Park Chan-wook. I also admire the sharp wit and blood-soaked tension of Japanese cinema, like the films of Toshiya Fujita and Masaki Kobayashi.</p>
+  <p>These are the types of characters I want to bring to the screen: flawed, brutal, unaware of how broken they truly are. I want to see them confront that truth. To test their bonds. To ask what happens when violence is no longer the answer, and friendship is all that remains.</p>
+  <p>A big thematic part of this film is the fear of death, which I've been struggling with for some time. In reality, it's not the fear of the action or way of dying, but of the unknown. How does it feel? Where do we go? What's the matter with it all?</p>
+</section>
+
+<section class="reel">
+  <figure class="reel__item">
+    <video autoplay muted playsinline loop preload="auto">
+      <source src="https://player.vimeo.com/progressive_redirect/playback/1180843766/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&amp;log_user=0&amp;signature=98e97783c19442af5bc86343b156d0aabda85bf13c99023fb76f789865eb054d" type="video/mp4">
+    </video>
+    <figcaption class="reel__caption">SLOW MOTION</figcaption>
+  </figure>
+  <figure class="reel__item">
+    <video autoplay muted playsinline loop preload="auto">
+      <source src="https://player.vimeo.com/progressive_redirect/playback/1180843595/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&amp;log_user=0&amp;signature=5205643bcdaad1355ee71bdfb3ff034ea8b92b0de5aaf030db63eb897f9abc5d" type="video/mp4">
+    </video>
+    <figcaption class="reel__caption">REAL SQUIBS AND BLOOD</figcaption>
+  </figure>
+  <figure class="reel__item">
+    <video autoplay muted playsinline loop preload="auto">
+      <source src="https://player.vimeo.com/progressive_redirect/playback/1180843664/rendition/720p/file.mp4%20%28720p%29.mp4?loc=external&amp;log_user=0&amp;signature=a62a25e555d34e8a2239300e5f255d28e15ca850097341f545cfd03bb1394946" type="video/mp4">
+    </video>
+    <figcaption class="reel__caption">HONG KONG ACTION</figcaption>
+  </figure>
+  <figure class="reel__item">
+    <video autoplay muted playsinline loop preload="auto">
+      <source src="https://player.vimeo.com/progressive_redirect/playback/1180855995/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&amp;log_user=0&amp;signature=4d40d40b98db98eb913d2fbdad65a03becc9823b1489091014c5b94b6e2a3987" type="video/mp4">
+    </video>
+    <figcaption class="reel__caption">CAMERA MOVEMENT</figcaption>
+  </figure>
+  <figure class="reel__item">
+    <video autoplay muted playsinline loop preload="auto">
+      <source src="https://player.vimeo.com/progressive_redirect/playback/1180843501/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&amp;log_user=0&amp;signature=390af6c160c20c875eb70ff5da4b6a7c2dc8578d02dc5f8c25a4fc81952235cc" type="video/mp4">
+    </video>
+    <figcaption class="reel__caption">ZOOM</figcaption>
+  </figure>
+</section>
+
+<section class="cast">
+  <article class="cast__member">
+    <img class="cast__portrait" src="Last Sunny Day_files/Cast/Francesco Pistone.png" alt="Oliver">
+    <h2 class="cast__role">Oliver</h2>
+    <p>Late 20s. Italian. A quiet storm behind dark sunglasses. Oliver moves like someone carrying a ghost&mdash;measured, watchful, haunted by stillness. His illness has dulled the sharpness of his hitman edge, replacing it with melancholy introspection. Beneath the black suit and cigarette smoke is a boy who once loved gently, now trapped between duty and death. Thoughtful and empathetic, but capable of lethal precision, Oliver is a man trying to make peace with the past before it buries him.</p>
+    <p class="cast__status"><a class="cast__status--attached" href="https://www.rbcasting.com/rb/en/web/francescopistone" target="_blank" rel="noopener">Francesco Pistone Attached</a></p>
+  </article>
+
+  <article class="cast__member">
+    <img class="cast__portrait" src="Last Sunny Day_files/Cast/Giacomo Giorgio.png" alt="Giorgio">
+    <h2 class="cast__role">Giorgio</h2>
+    <p>Male, late 20s, Italian. Giorgio is volatile, expressive, and emotionally raw. He covers his wounds with swagger, jokes, and sudden violence. Beneath his bravado is a desperate need for connection.<br>More impulsive than Oliver and more broken than he admits, Giorgio is loyal to a fault. He&rsquo;s like a stray dog who found a pack. Torn between tenderness and brutality, Giorgio carries his trauma with the charm of a boy pretending not to care.</p>
+    <p class="cast__status"><a class="cast__status--attached" href="https://www.instagram.com/giacomogiorgioreal/?hl=en" target="_blank" rel="noopener">Giacomo Giorgio Attached</a></p>
+  </article>
+
+  <article class="cast__member">
+    <img class="cast__portrait" src="Last Sunny Day_files/Cast/Anna.webp" alt="Anna">
+    <h2 class="cast__role">Anna</h2>
+    <p>Female, early 20s, Greek. A survivor forged in captivity. Anna is quiet but not weak. Beneath her silence is a storm of rage, grief, and defiant will. Once trafficked, now escaped, she moves like a ghost reclaiming her own story. Her presence disrupts everything. She is the moral center of the film&mdash;a mirror to the men&rsquo;s brutality, and a force with more to lose, and more courage to act.</p>
+    <p class="cast__status">Not Attached</p>
+  </article>
+
+  <article class="cast__member">
+    <img class="cast__portrait" src="Last Sunny Day_files/Cast/Frank.jpg" alt="Frank">
+    <h2 class="cast__role">Frank</h2>
+    <p>Male, late 50s to early 60s, Italian. A godfather stripped of glamour. Frank is cold, mechanical, and emotionless. He issues commands, not conversation. His evil feels bureaucratic&mdash;efficient, orderly, and deeply embedded.</p>
+    <p>Frank turns children into soldiers and death into a business. He thrives on control, loyalty, and silence. A funeral director by trade and a manipulator by nature, he is the past refusing to stay buried. A puppet master hidden behind veils and empty coffins.</p>
+    <p class="cast__status">Not Attached</p>
+  </article>
+
+  <article class="cast__member">
+    <img class="cast__portrait" src="Last Sunny Day_files/Greek Elvis/Greek Elvis Thumnail.png" alt="Greek Elvis">
+    <h2 class="cast__role">Greek Elvis</h2>
+    <p>Male, 40s&ndash;50s, Greek. A grotesque relic of showbiz and sleaze. Greek Elvis is trapped in a fantasy version of himself, a tragic parody of faded fame. Rhinestones, sweat, and menace define his surface. Beneath it, he is both predator and coward&mdash;hiding cruelty behind flamboyant theatrics.<br>To outsiders, he is a joke. To those under his control, he is a nightmare. His glittering stage persona masks a violent core. He is entertainment turned rotten, a false smile painted on an abuser still desperate for applause.</p>
+    <p class="cast__status"><a class="cast__status--attached" href="https://www.lifo.gr/tags/giannis-klinis" target="_blank" rel="noopener">Giannis Klinis Attached</a></p>
+  </article>
+</section>
+
+<section class="elvis" id="greek-elvis">
+  <div class="elvis__stage">
+    <iframe
+      id="elvis-player"
+      src="https://player.vimeo.com/video/1180606477?h=c2d261d2a1&amp;controls=0&amp;title=0&amp;byline=0&amp;portrait=0&amp;playsinline=1&amp;dnt=1"
+      title="Greek Elvis"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen></iframe>
+
+    <button class="elvis__watch" type="button" aria-label="Play Greek Elvis">Watch Greek Elvis</button>
+
+    <div class="elvis__controls">
+      <button class="elvis__toggle" type="button" aria-label="Play / pause"></button>
+      <div class="elvis__track">
+        <span class="elvis__progress"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+(function () {
+  var section  = document.getElementById('greek-elvis');
+  var player   = new Vimeo.Player(document.getElementById('elvis-player'));
+  var watch    = section.querySelector('.elvis__watch');
+  var toggle   = section.querySelector('.elvis__toggle');
+  var track    = section.querySelector('.elvis__track');
+  var progress = section.querySelector('.elvis__progress');
+  var duration = 0;
+
+  player.getDuration().then(function (d) { duration = d; });
+
+  function play()  { player.play().catch(function () {}); }
+  function pause() { player.pause(); }
+
+  watch.addEventListener('click', play);
+  toggle.addEventListener('click', function () {
+    player.getPaused().then(function (paused) { paused ? play() : pause(); });
+  });
+
+  player.on('play',  function () { section.classList.add('is-playing'); });
+  player.on('pause', function () { section.classList.remove('is-playing'); });
+  player.on('ended', function () {
+    section.classList.remove('is-playing');
+    progress.style.width = '0';
+  });
+
+  player.on('timeupdate', function (data) {
+    progress.style.width = (data.percent * 100) + '%';
+  });
+
+  track.addEventListener('click', function (e) {
+    if (!duration) return;
+    var box = track.getBoundingClientRect();
+    var pct = Math.min(Math.max((e.clientX - box.left) / box.width, 0), 1);
+    player.setCurrentTime(pct * duration);
+  });
+})();
+</script>
+
+<section class="soundtrack">
+  <h2 class="soundtrack__heading">Soundtrack</h2>
+
+  <!-- Each track links out. Replace href="#" with the track URL. -->
+  <ul class="soundtrack__list">
+    <li><a href="https://www.youtube.com/watch?v=0cfveJ9g0BI&amp;list=RD0cfveJ9g0BI&amp;start_radio=1" target="_blank" rel="noopener">Cuando Vuelva a Tu Lado</a></li>
+    <li><a href="https://www.youtube.com/watch?v=MQchUN0hT0U&amp;list=RDMQchUN0hT0U&amp;start_radio=1" target="_blank" rel="noopener">Il Mio Giorno</a></li>
+    <li><a href="https://www.youtube.com/watch?v=Zx4CKpf_MrU&amp;list=RDZx4CKpf_MrU&amp;start_radio=1" target="_blank" rel="noopener">Le Vent Le Cri</a></li>
+    <li><a href="https://www.youtube.com/watch?v=ZIcdbDEF7-4&amp;list=RDZIcdbDEF7-4&amp;start_radio=1" target="_blank" rel="noopener">Tha Me Thimithis</a></li>
+    <li><a href="https://www.youtube.com/watch?v=2i4bbOeJyw8&amp;list=OLAK5uy_lfDTCjUa3ULqxHoQmx_WXuUL0uN-yL5eU&amp;index=83" target="_blank" rel="noopener">Diamonds and Blues (Eleni Karaoindrou)</a></li>
+    <li><a>Parisienne Walkways</a></li>
+    <li><a href="https://www.youtube.com/watch?v=pdgSC2B_9t4&amp;list=RDpdgSC2B_9t4&amp;start_radio=1" target="_blank" rel="noopener">La Mer / Romance Andalusa</a></li>
+    <li><a href="https://www.youtube.com/watch?v=LykJqvIMPNw&amp;list=RDLykJqvIMPNw&amp;start_radio=1" target="_blank" rel="noopener">Las Simples Cosas</a></li>
+    <li><a href="https://www.youtube.com/watch?v=G1NrgQP_tr8&amp;list=RDG1NrgQP_tr8&amp;start_radio=1" target="_blank" rel="noopener">Effigies Kai Pires</a></li>
+    <li><a href="https://www.youtube.com/watch?v=WWWCyV0VIqo" target="_blank" rel="noopener">Ase Me Na Figo</a></li>
+    <li><a href="https://www.youtube.com/watch?v=6n6-aoiTsyU&amp;list=RD6n6-aoiTsyU&amp;start_radio=1" target="_blank" rel="noopener">Oneiro Hameno</a></li>
+    <li><a href="https://www.youtube.com/watch?v=rt7PPidlIvg&amp;list=RDrt7PPidlIvg&amp;start_radio=1" target="_blank" rel="noopener">Funnel of Love</a></li>
+    <li><a href="https://www.youtube.com/watch?v=V5enDtP4WfE&amp;list=RDV5enDtP4WfE&amp;start_radio=1" target="_blank" rel="noopener">Now You&rsquo;re All Alone</a></li>
+  </ul>
+</section>
+
+<section class="gallery gallery--gallery" id="gallery">
+  <div class="gallery__grid">
+    <img src="Last%20Sunny%20Day_files/Grid/68090d4f1048fdac5e57d4b1_2013_Lasting_Jacek-Borcuch_Michal-Englert_11.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493ccfe32dd7f9df240c3_anna_1973_Charley-Varrick_Don-Siegel_Michael-C-Butler_35.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493cd08fa5804c38d2041_anna_PARTHENOPE%20di%20Paolo%20Sorrentino_Celeste%20Dalla%20Porta_foto%20di%20Gianni%20Fiorito%20%281%29%20%281%29.webp" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493cd1b7b67e82e44dd32_anna_1998_Pleasantville_Gary-Ross_John-Lindley_50.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493cd1c0665e915a78db4_anna_1993_Carlitos-Way_Brian-De-Palma_Stephen-Goldblatt_30.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493cd2c05388aa6c50b5c_anna_2008_Revanche_Go%CC%88tz-Spielmann_Martin-Gschlacht_7.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493cd381b78d2cb5d194b_anna_2008_Choke_Clark-Gregg_Tim-Orr_30.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493cd3a2ff9fd1f219ad7_Anna_1995_The-Crossing-Guard_Sean-Penn_Vilmos-Zsigmond_3.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493cd5df42b8f38352638_anna_2005_Next-Door_Pa%CC%8Al-Sletaune_John-Andreas-Andersen_17.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493cd7d77c5b6e50e3d8b_Anna_1971_Vampyros-Lesbos_Jesu%CC%81s-Franco_Manuel-Merino_17.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493cdf634c8f937c0aaa7_anna_1974_Lenny_Bob-Fosse_Bruce-Surtees_6.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493ce14c8b8435c6582d9_anna_Mat-Zo_Sinful_20160303_243_0019.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493ce8223ea2a891d7921_anna_2012_Byzantium_Neil-Jordan_Sean-Bobbitt_2.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493ced3757ef9aa7550b1_anna_parthenope.avif" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493ced9c66c4a2eecf7d9_anna.webp" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493cf381b78d2cb5d1a99_anna_Major-Lazer_Night-Riders_20160615_254_0031.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493cf56bb1f1cdbbce1de_Anna_Vogue_Rollergirl_20150221_117_08.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493cf5d8d1f8f3b3ae316_anna_Maison-Margiela_Mutiny_20200916_60_05.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689493cfb545218fef4c8304_anna_Christine--the-Queens_Je-Disparais-Dans-Tes-Bras_20200223_828_007.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495bd0a14d3ce2531382b_boys_7586ffba1491c72690f97693d4e7aaf0.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495bd0f7bb1e068001cb2_boys_4a7195b91d14b57b5416a67bc78c9952.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495bd4635408ed302874f_boys_3c0bd123d8f2a66e97eee76a35743dd1.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495bd9124bb020a63b537_boys_7e199aa44f5516723b1771d2b611aa30.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495bdaf731174fdda4b90_boys_3b38ffcc18f957fdeb061a5ad05bbb2d.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495bdc50e42e76188d313_boys_656d020cdf78e1f25304344d8838ef6d%20copy.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495bdfe2da0c4b7aff3c2_boys_38aa1d284140771ee3e6fbbeee2aa8aa.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495be0f7bb1e068001ce4_boys_ca2f649caa0549a86202f83467a528ae.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495be149b1becd3a0f76c_boys_f724aadb22aac3c6cf26e75cf53e66b5.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495be2ec2a83efcc778bf_boys_fb5a2796ac35086a7c3403b11cebd827.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495be338edb62432b51a8_boys_f69de015f9c598822389c2302c6d56c0.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495be4635408ed30287bd_boys_98e412a0c7c786d1fd00472d333bd46b.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495beeb9dd069e40538c3_boys_f94e7e7a8f0ec8778b07f606cb97ab0e.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495beed1f8d9c5e2371ce_boys_c5d6950b0ce979deb2c21550143902aa.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495bf37569704495c9732_boys_2015_By-The-Sea_Angelina-Jolie_Christian-Berger_00044.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495bf5e257097a753509f_boys_1967_La-Collectionneuse_Eric-Rohmer_Ne%CC%81stor-Almendros_25.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495bf816817d2a08747c3_boys_232690a755c096556c7d249718c29aba.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495bf9c7f34ea587a3702_boys_1984_Steetwise_Martin-Bell_Martin-Bell_28.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495bfd82afd4289bc3b3f_boys_bbd3c803a7cfda2abece41ef8eedfafb.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495bfd9c66c4a2eedb204_boys_1979_The-Wanderers_Philip-Kaufman_Michael-Chapman_14.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495bfe355c1671aaf7105_boys_qqsMWcJCnl11IllBLvEWmleRbEQ.jpeg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c0381b78d2cb5de0ff_boys_1967_Two-or-Three-Things-I-Know-About-Her_Jean-Luc-Godard_Raoul-Coutard_59.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c0a9c7cf37a7b5050f_boys_1960_Purple-Noon_Rene%CC%81-Cle%CC%81ment_Henri-Decae%CC%88_60.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c0ac190f7fb2c0620e_boys_1998_Dark-City_Alex-Proyas_Dariusz-Wolski_18.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c0b545218fef4d4009_boys__2006_This-Is-England_Shane-Meadows_Danny-Cohen_1.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c0d38fc15ae4dfccbe_boys_1960_Purple-Noon_Rene%CC%81-Cle%CC%81ment_Henri-Decae%CC%88_53.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c11bb3e42a1720bd1e_boys_Lil-Yachty_Count-Me-In_20180322_143_0017.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c11d92a7fcf51e0e36_boys_1967_La-Collectionneuse_Eric-Rohmer_Ne%CC%81stor-Almendros_47.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c1236e2ef791ed1ca5_boys_Ora-The-Molecule_Die-To-Be-A-Butterfly_20200117_217_027.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c134f3e8c90700a31d_boys_Apparat_Heroist_20190911_371_0025.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c17da73fdae9435afa_boys_1969_The-Swimming-Pool_Jacques-Deray_Jean-Jacques-Tarbe%CC%80s_4.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c1e24e6fdad8ac0955_boys_1995_Fallen-Angels_Wong-Kar-Wai_Christopher-Doyle_27.jpeg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c256bb1f1cdbbd7f91_boys_1969_The-Swimming-Pool_Jacques-Deray_Jean-Jacques-Tarbe%CC%80s_1.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c297e7932eba7e2ec8_boys_2017_Call-Me-by-Your-Name_Luca-Guadagnino_Sayombhu-Mukdeeprom_00015.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c2b1bf57cfe10e2a0b_boys_2005_Down-In-The-Valley_David-Jacobson_Enrique-Chediak_28.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c2e24e6fdad8ac09ce_boys_1968_The-Girl-on-a-Motorcycle_Jack-Cardiff_Rene%CC%81-Guissart-Jr_59.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c311c9def500c78de3_boys_BMW_The-8_20181109_91_033.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c35e662bc75e9b0cf6_boys_Jordan-Klassen_Virtuous-Circle_20190604_310_007.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495c3cc44bec3612596b2_boys_Gener8ion_Neo-Surf_20211022_269_04.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689495df693c2b0f8d64bd95_boys_1969_The-Swimming-Pool_Jacques-Deray_Jean-Jacques-Tarbe%CC%80s_2.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689498134526d59b186311a8_Frank_1992_Unforgiven_Clint-Eastwood_Jack-N-Green_17.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689498137064c6b3bb84a604_Frank_2009_Broken-Embraces_Pedro-Almodovar_Rodrigo-Prieto_00037.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894981408275ec1e39de969_Frank_Quiet-Eyes_Past-Lives_20230817_217_78_10.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689498141e6376ff6dd42146_Frank__Dope-Lemon_Give-Me-Honey_20190701_214_15_5.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894986814c8b8435c67325d_Elvis_img%20%284%29.webp" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949868816817d2a08852bb_Elvisimg%20%281%29.webp" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894986899e053dd4c5e5a6d_Elvisimg%20%286%29.webp" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949868c50e42e76189d2e0_Elvis_images%20%281%29.jpeg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949868e355c1671ab07207_Elvis_img%20%282%29.webp" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689498a08223ea2a891f434b_Screenshot%202025-08-07%20at%203.14.13%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689498db010c4a0ec91e48bf_Screenshot%202025-08-07%20at%203.14.52%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689498dbb1bf57cfe10f819b_Screenshot%202025-08-07%20at%203.15.13%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689498dbddc13f12faa0640d_Screenshot%202025-08-07%20at%203.14.59%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949910ac190f7fb2c1bec2_faces_1990_Nikita_Luc-Besson_Thierry-Arbogast_12.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949911149b1becd3a24e3f_faces_Eli-Brown--Talk-Show_In-Trouble-Now_20210310_177_018.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949911ac190f7fb2c1befa_Faces_James-Massiah_Natural-Born-Killers_20190908_295_010.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949911b712a39fd0210fc6_faces_Data_Dont-Sing_20150518_233_0013.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949911f73350457ceb95a1_faces_1999_Ghost-Dog_Jim-Jarmusch_Robby-Mu%CC%88ller_19.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499125df42b8f383747a6_Faces_Imago_Ajedrez_20151209_34_25_8.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499132b220a820fb7aa68_Faces_DU_Many-Rules_20190918_66_50_29.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949913491d55d2236cd015_faces_Gohu_Vai-Ficar-Fixe_20200414_229_0010.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e23a2ff9fd1f23e0c9_land_15da435e04e64fa6190ff4997a9ffb38.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e23a6e7de41155e1e5_land_1_IzjSsC3rVzJvQgke7tm82Q.webp" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e2693c2b0f8d664d5a_land_127aab08a2fc5fb745319bdad4cf0656.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e29124bb020a65761c_land_6ead7f8f1c1c4239f4033c9904fd63a0.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e2c6897107084b64ea_land_0c566bd74b2d8e9a41337c4910faf581.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e31d14b5f0b0a5d4b2_land_029a2a170265f1afb18896d86a589ddb.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e3447ea87ce9411b76_land_00ce5d4c3fb0846fc2dc767fd561ccaf.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e35d8d1f8f3b3d5172_land_69a0ac6babce6b6a34214713b726b49b.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e3e478f5ad3f3e2523_land_4aca056cbd2d065a6387e12f5b2233ca.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e410fdc27a1691c3f3_land_1974_Martha_Rainer-Werner-Fassbinder_Michael-Ballhaus_29.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e411c9def500c93e5d_land_1975_The-Passenger_Michelangelo-Antonioni_Luciano-Tovoli_41.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e42ec2a83efcc91d64_land_1965_For-A-Few-Dollars-More_Sergio-Leone_Massimo-Dallamano_64.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e4b7dc6f39dfded914_land_1970_Catch-22_Mike-Nichols_David-Watkin_64.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e5842f758adeb5434d_land_1978_The-Kingdom-of-Naples_Werner-Schroeter_Thomas-Mauch_58.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e597555e5913fd2cb6_land_2006_The-Hills-Have-Eyes-2006_Alexandre-Aja_Maxime-Alexandre_6.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e66d0b5b9ce786196e_land_1979_Mad-Max_George-Miller_David-Eggby_35.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e6eae31330c250782d_land_2015_A-Bigger-Splash_Luca-Guadagnino_Yorick-Le-Saux_00034.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e7463d948ff37af82a_land_1995_The-Flower-of-My-Secret_Pedro-Almodovar_Affonso-Beato_00045.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e76d62de50b6f2905a_land_1978_The-Kingdom-of-Naples_Werner-Schroeter_Thomas-Mauch_10.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e7c59da82770314fe7_land_1978_The-Kingdom-of-Naples_Werner-Schroeter_Thomas-Mauch_28.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e83724a897a25fc239_land_2008_Adam-Resurrected_Paul-Schrader_Sebastian-Edschmid_00050.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e8a2b0214b97340a05_land_2011_Limitless_Neil-Burger_Jo-Willems_19.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e8b1bf57cfe110072a_land_2013_Before-Midnight_Richard-Linklater_Christos-Voudouris_4.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e910e9867f7be04f58_land_Cofidis_Paralympic-Cycling-Team_20141203_42_009.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e92c05388aa6c77408_land_2010_The-American_Anton-Corbijn_Martin-Ruhe_13.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e95e713bf96934d575_land_384f483507281b7a060a514c8662f34a.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499e9e1cb7d3dd31a6921_Land_Ducati_Born-Explorer_20191010_69_0_1.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ea120157714bbab710_land_Reebok_Be-More-Human_20180105_97_19_5.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ea2915466ba058e0b9_land_Rac_WA_20150215_60_0011.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ea3be41efe83cb629e_land_Lee_Move-Your_20190205_90-00-00-04-795_0005.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ea784f149829ef48c6_land_Apple_Anatolian-Lights_20170414_175_0017.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ea7d77c5b6e510da6e_land_1963_Contempt-Le-Me%CC%81pris_Jean-Luc-Godard_Raoul-Coutard_55.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ea990d97a404ee3cf1_land_Apple_Anatolian-Lights_20170414_175_0020.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499eacb8297f0cbd7c889_land_Gore-Tex_The-Experience-B_20160307_160_003.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ead958e3234ae13ac9_land_Rick-Ross_Santorini-Greece_20181011_343_205_20.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ebd6a1a20d2c1b4504_land_Milk_VCR_20200511_181_009.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ec236e2ef791eec4aa_land_SZA_Good-Days_20210305_339_002.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ec301da874748fbfd2_land_Shawn-Mendes_Summer-of-Love_20210820_181_2_001.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ec3b72f6c8ddcae2b4_land_Glamora_Glampure-The-Organic-Wall-Covering_20200612_72_005.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ec4aa550aa89d85b4e_land_DEAF-HAVANA_MILDRED_20180407_223_141_33.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ecb7dc6f39dfdedb9a_land_INFINITI_QX50_20190219_106_59_8.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499eceb76c48c7e497659_land_Mined_Girl_20170726_196_178_11.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ee010c4a0ec91ebe88_land_Rivver_Am-I-Ok_20150507_174_001.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ee22660b35966cb301_land_Sigrid_Mirror_20210901_251_001.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ee2c05388aa6c77749_Land_Ifolor_Best-Of-Life_20200927_57_004.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ee5e257097a754e959_land_Square_Second-Street-Fitness_20170627_288_0012.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ee7f3c623079ca891e_land_Zara_The-Wake-Up-Call_20200901_140_26_6.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ee8223ea2a891fd316_land_Col3trane_Britney_20180809_325_021.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499eef634c8f937c33366_land_1960_Purple-Noon_Rene%CC%81-Cle%CC%81ment_Henri-Decae%CC%88_61.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ef00daeae28debd34f_land_POL_We-Run_20210818_192_109_29.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ef27dc0df4ab8589a3_land_Glamora_Glampure-The-Organic-Wall-Covering_20200612_72_002.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ef339b3a4a1e26a824_land_GIORGIO-ARMANI_Untitled_20190218_60_43_19.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499ef97e7932eba7fe618_land_Sanex_20200101_Touch-Keeps-You-Alive_61_14.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499f12c0c1ba06c5c92c6_land_Sam-Fender_Seventeen-Going-Under_20210708_235_0020.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499f1b3478c4f0f6eeb0f_land_Mango_A-Mediterranean-Dream_20210903_324_11.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689499f2842f758adeb54735_land_Loro-Piana_SS21_20210425_64_007.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949d00a7466a4c20835532_arch_1970_The-Bird-With-The-Crystal-Plumage_Dario-Argento_Vittorio-Storaro_11.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949d0207b21d8c5d38a219_arch_Jen-Cloher_Regional-Echo_20170809_343_161_11.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949d023be41efe83cc947f_arch_2013_The-Great-Beauty_Paolo-Sorrentino_Luca-Bigazzi_00063.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949d02ce2c9fb7ce9c38bb_arch_2010_Biutiful_Alejandro-Ganzalez-Inarritue_Rodrigo-Prieto_00052.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949d02ed1f8d9c5e268f3a_arch_Dior_Les-Parfums_20161008_66_0039.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949d051d14b5f0b0a739ac_arch_2005_Selfless_Tarsem-Singh_Brendan-Galvin_22.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949d0522660b35966e17dc_arch_1963_Contempt-Le-Me%CC%81pris_Jean-Luc-Godard_Raoul-Coutard_50.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949d7b63b4defe618294b9_hearse_32f5d7cba48eea3850afd94599558408.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949d7b779963639588ad78_hearse_869dd5d6aacaa07ae4230c287a100e34.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949d7ba4cc75c19ef6f961_hearse_6f200ca8dd8d7a67a47b031545c732d2.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949d7ba5add508f97bacf7_hearse_dd609f872b4e72cc0f614d9261637c83.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949d7c1d92a7fcf5215edd_hearse_b11975abb9b73e3b86daf6037d091c39.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949d7c463d948ff37c5dec_hearse_f03c0bf94f6b7002923b1f2522bd7aa9.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949d7c6d3004ee72e6af3d_hearse_e7ebfec0e2aeba7ca3260c9cc731b7f7.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949d7e667342060f579a0f_hearse_Duel_A-La-Vie-A-La-Mort_20200303_230_018.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949dd85e713bf96936714a_Detail_Xerox_Set-the-Page-Free-Lee-Child_20171023_140_96_12.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949dd868622e067845bac2_Detail_Iron--Wine_Everyone%E2%80%99s-Summer-of-%E2%80%9895_20160929_212_30_3.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949dd86d0b5b9ce788297b_details_Brodinski_Cant-Help-Myself_20141120_242_0013.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949dd92919f359e1ab5e08_DetailsPost-Bellum_Surviving-Interrogation_20190618_60_5_2.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949dd9491d55d2236ee49c_detail%2BGrace-Carter_Pick-your-tears-up_20230224_191_105_10.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949dd94929aa19d60ee802_details_Kenzie_Funeral_20180911_210_0027.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949def16c1776b7bfa5ef9_Screenshot%202025-08-07%20at%203.36.53%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3d0a14d3ce2534b25d_bw_9f899133a0a8ca2695729f2cf4eb254d.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3d16aaf78354516cd4_bw_553bf22dbb69b3443802ffe812ed90a7.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3d1d066c1f1449de65_bw_c988806a6022dc56ef96dd3f84689f7c.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3d1da4e19d1644fa7d_bw_74cc7cf42eb4d6310a29aaa38e50071e.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3dafbf79a6f0cd0e49_bw_06c846a26ba71166309edc095dc749cd.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3dbf4c66aee3a92af8_bw_0308f37f0592497550384d63b4994db7%20%281%29.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3e14c8b8435c6974a3_bw_53aeff9c3610d9979dab8f32b8641b99.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3e30b53b2ebf32ed5f_bw_78da25a132a1dab63b8d9802659c3630.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3e378edcfbe8b46ee5_bw_e6a8a9b74ad9728fe2c0e344799fdbaf.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3ecc44bec36129fc27_bw_80291b9cfb1ce85b7b1e7f4a19c15d0c.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3edc6e4cfa5d7ba56f_bw_134d75b17207b4ab3b3ee840c083acc5.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3f14c8b8435c697500_bw_2012_The-Legend-Of-Kaspar-Hauser_Davide-Manuli_Tarek-Ben-Abdallah_3.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3f2b591036a7bbb06a_bw_1954_La-Strada_Federico-Fellini_Otello-Martelli--Carlo-Carlini_0.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3f3b982eae6f902a49_bw_2012_The-Legend-Of-Kaspar-Hauser_Davide-Manuli_Tarek-Ben-Abdallah_42.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3f77a9e597323efeb5_bw_1997_Happy-Together_Wong-Kar-Wai_Christopher-Doyle_8.jpeg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3f972946050cdf8c11_bw_1982_The-State-of-Things_Wim-Wenders_Henri-Alekan--Fred-Murphy_20.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3fd9c66c4a2ef16afe_bw_1983_The-Last-Battle_Luc-Besson_Carlo-Varini_60.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3fe1cb7d3dd31c4041_bw_1967_Whos-That-Knocking-At-My-Door_Martin-Scorsese_Michael-Wadley--Richard-Coll_3.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e3ff22b14747760a8ae_bw_1969_Katzelmacher_Rainer-Werner-Fassbinder_Dietrich-Lohmann_56.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e414aa550aa89da6ada_bw_Flexfit_The-Hold-Downs_20160812_158_0018.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e41a7466a4c2083da63_bw_Screenshot%202024-11-02%20at%201.17.01%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e41de1e6707c92c731f_bw_92072054_lb_8.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e421c0665e915ac0943_bw_Screenshot%202024-04-24%20at%209.53.38%E2%80%AFAM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e421d066c1f1449df5e_bw_Screenshot%202024-11-02%20at%201.12.26%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e423724a897a261a52a_bw_2012_The-Legend-Of-Kaspar-Hauser_Davide-Manuli_Tarek-Ben-Abdallah_5.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e4273b9a5b625ad04c4_bw_Screenshot%202024-11-02%20at%201.12.38%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e432dc3bfec07c1f783_bw_1970_Gods-Of-The-Plague_Rainer-Werner-Fassbinder_Dietrich-Lohmann_35.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e432ec2a83efccae0c6_bw_Screenshot%202024-04-24%20at%209.53.14%E2%80%AFAM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e43c6e8a617ce6954e2_bw_Screenshot%202024-11-02%20at%201.12.16%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e440a14d3ce2534b470_bw_Screenshot%202024-11-02%20at%201.17.14%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e441da4e19d164505f9_bw_Screenshot%202024-04-24%20at%209.54.00%E2%80%AFAM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e445ea8ff9310aba557_bw_Screenshot%202024-04-24%20at%209.53.46%E2%80%AFAM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e44779963639588f309_bw_Screenshot%202024-04-24%20at%209.54.10%E2%80%AFAM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e44990d97a404f00945_bw_2012_The-Legend-Of-Kaspar-Hauser_Davide-Manuli_Tarek-Ben-Abdallah_6.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e44c7daac418fa7c034_bw_Screenshot%202024-04-24%20at%209.54.20%E2%80%AFAM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e44d38fc15ae4e2eca9_bw_2012_The-Legend-Of-Kaspar-Hauser_Davide-Manuli_Tarek-Ben-Abdallah_1.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e463724a897a261a671_bw_Fears_The-Squeeze_20170907_226_95_24.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e4650a030a0762ecf59_bw_1988_The-Big-Blue_Luc-Besson_Carlo-Varini_4.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e465da10cf56743f8ef_bw_Screenshot%202024-11-26%20at%209.31.29%E2%80%AFAM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e46805fcc048a1ea72b_bw_Barneys_The-Banya-In-Brooklyn_20160511_96_41_12.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e4696b327b225cc3366_bw_2012_The-Legend-Of-Kaspar-Hauser_Davide-Manuli_Tarek-Ben-Abdallah_21.jpg" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e46a1624aa45b219e55_bw_Karlovy-Vary-International-Film-Festival_Harvey-Keitel_20160222_73_003.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e46c7daac418fa7c11a_bw_Skrillex--Wiwek_Killa_20161021_227_0025.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/68949e473b982eae6f902f0f_bw_Juicy-J_No-English_20160805_224_021.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894ada5c50e42e76192d9b7_Screenshot%202024-11-09%20at%2012.13.05%E2%80%AFAM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894ae9b10fdc27a169ba57a_Screenshot%202025-08-07%20at%204.46.08%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894ae9b2909c57ebac12f03_Screenshot%202025-08-07%20at%204.47.15%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894ae9b6d1f4c8d5dde1290_Screenshot%202025-08-07%20at%204.46.50%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894ae9b9089d95512176a5b_Screenshot%202025-08-07%20at%204.47.03%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894ae9b927cbff2794c2731_Screenshot%202025-08-07%20at%204.46.31%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894ae9bd1cdddd318f02407_Screenshot%202025-08-07%20at%204.46.42%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894ae9bf2196107409cdd78_Screenshot%202025-08-07%20at%204.46.23%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894ae9c7ce81fe47af4ebd2_Screenshot%202025-08-07%20at%204.46.16%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894ae9cb3478c4f0f786046_Screenshot%202025-08-07%20at%204.45.03%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894ae9ced1f8d9c5e2dd7c7_Screenshot%202025-08-07%20at%204.46.00%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894ae9d842f758adebf3925_Screenshot%202025-08-07%20at%204.45.29%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894ae9de4f5e4faff957a8c_Screenshot%202025-08-07%20at%204.45.14%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/6894ae9df382acbb0a06aa9e_Screenshot%202025-08-07%20at%204.45.52%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/689511fa851690813e342bcc_Screenshot%202025-08-07%20at%206.45.39%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+    <img src="Last%20Sunny%20Day_files/Grid/69d50af3ed1e602c1e438b7e_Screenshot%202026-04-07%20at%204.47.18%E2%80%AFPM.png" alt="" loading="lazy" decoding="async">
+  </div>
+
+  <nav class="gallery__nav">
+    <div class="gallery__nav-left">
+      <a class="gallery__top" href="#top">Back to top</a>
+      <button type="button" data-view="gallery" aria-pressed="true">Gallery</button>
+    </div>
+    <div class="gallery__nav-mid">
+      <button type="button" data-view="full" aria-pressed="false">Full size</button>
+    </div>
+    <div class="gallery__nav-right">
+      <button type="button" data-view="grid" aria-pressed="false">Grid</button>
+    </div>
+  </nav>
+</section>
+
+<script>
+(function () {
+  var gallery = document.getElementById('gallery');
+  var buttons = gallery.querySelectorAll('.gallery__nav button[data-view]');
+
+  Array.prototype.forEach.call(buttons, function (btn) {
+    btn.addEventListener('click', function () {
+      var view = btn.dataset.view;
+      gallery.classList.remove('gallery--gallery', 'gallery--full', 'gallery--grid');
+      gallery.classList.add('gallery--' + view);
+      Array.prototype.forEach.call(buttons, function (b) {
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+    });
+  });
+})();
+</script>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+  <button class="lightbox__close" type="button" aria-label="Close"></button>
+  <img alt="">
+</div>
+
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Split body copy into lines ---- */
+  var bodyCopy = document.querySelectorAll(
+    '.header__logline, .prose p, .cast__member p'
+  );
+
+  function splitLines(el) {
+    if (el.dataset.html === undefined) el.dataset.html = el.innerHTML;
+    el.innerHTML = el.dataset.html;
+
+    // Wrap every word so we can measure where the browser broke each line.
+    var nodes = Array.prototype.slice.call(el.childNodes);
+    var flat = document.createDocumentFragment();
+
+    nodes.forEach(function (node) {
+      if (node.nodeType === 3) {
+        node.textContent.split(/(\s+)/).forEach(function (chunk) {
+          if (!chunk) return;
+          if (/^\s+$/.test(chunk)) {
+            flat.appendChild(document.createTextNode(' '));
+          } else {
+            var w = document.createElement('span');
+            w.className = 'w';
+            w.textContent = chunk;
+            flat.appendChild(w);
+          }
+        });
+      } else {
+        flat.appendChild(node.cloneNode(true));
+      }
+    });
+
+    el.innerHTML = '';
+    el.appendChild(flat);
+
+    // Group words by their vertical offset, then wrap each group as a line.
+    var kids = Array.prototype.slice.call(el.childNodes);
+    var lines = [];
+    var current = [];
+    var lastTop = null;
+
+    kids.forEach(function (node) {
+      if (node.nodeType === 1 && node.tagName === 'BR') {
+        lines.push(current); current = []; lastTop = null;
+        return;
+      }
+      if (node.nodeType === 1 && node.classList.contains('w')) {
+        var top = node.offsetTop;
+        if (lastTop !== null && top > lastTop) {
+          lines.push(current); current = [];
+        }
+        lastTop = top;
+      }
+      current.push(node);
+    });
+    if (current.length) lines.push(current);
+
+    el.innerHTML = '';
+    lines.forEach(function (group) {
+      if (!group.length) return;
+      var line  = document.createElement('span');
+      var inner = document.createElement('span');
+      line.className = 'ln';
+      inner.className = 'ln__i';
+      group.forEach(function (n) { inner.appendChild(n); });
+      line.appendChild(inner);
+      el.appendChild(line);
+    });
+
+    Array.prototype.forEach.call(el.querySelectorAll('.ln__i'), function (i, idx) {
+      i.style.transitionDelay = (idx * 0.06) + 's';
+    });
+  }
+
+  if (!reduced) Array.prototype.forEach.call(bodyCopy, splitLines);
+
+  /* ---- Headings fade in ---- */
+  var headings = document.querySelectorAll(
+    '.prose__heading, .cast__role, .soundtrack__heading, .cast__status, .cast__portrait'
+  );
+  Array.prototype.forEach.call(headings, function (h) { h.classList.add('reveal'); });
+
+  /* ---- Observe everything ---- */
+  var targets = []
+    .concat(Array.prototype.slice.call(headings))
+    .concat(Array.prototype.slice.call(bodyCopy))
+    .concat(Array.prototype.slice.call(document.querySelectorAll('.gallery__grid img')));
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-inview');
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+
+    targets.forEach(function (t) { io.observe(t); });
+  } else {
+    targets.forEach(function (t) { t.classList.add('is-inview'); });
+  }
+
+  /* ---- Re-split lines on resize ---- */
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    if (reduced) return;
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      Array.prototype.forEach.call(bodyCopy, function (el) {
+        var seen = el.classList.contains('is-inview');
+        splitLines(el);
+        if (seen) el.classList.add('is-inview');
+      });
+    }, 200);
+  });
+
+  /* ---- Lightbox ---- */
+  var box   = document.getElementById('lightbox');
+  var boxImg = box.querySelector('img');
+  var close = box.querySelector('.lightbox__close');
+  var lastFocus = null;
+
+  function open(src, alt) {
+    lastFocus = document.activeElement;
+    boxImg.src = src;
+    boxImg.alt = alt || '';
+    box.hidden = false;
+    requestAnimationFrame(function () { box.classList.add('is-open'); });
+    document.body.style.overflow = 'hidden';
+    close.focus();
+  }
+
+  function shut() {
+    box.classList.remove('is-open');
+    document.body.style.overflow = '';
+    setTimeout(function () {
+      box.hidden = true;
+      boxImg.removeAttribute('src');
+    }, 350);
+    if (lastFocus) lastFocus.focus();
+  }
+
+  document.querySelector('.gallery__grid').addEventListener('click', function (e) {
+    var img = e.target.closest('img');
+    if (!img) return;
+    if (document.getElementById('gallery').classList.contains('gallery--full')) return;
+    open(img.currentSrc || img.src, img.alt);
+  });
+
+  close.addEventListener('click', shut);
+  box.addEventListener('click', function (e) { if (e.target === box) shut(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && box.classList.contains('is-open')) shut();
+  });
+})();
+</script>
+
+</body>
+</html>
