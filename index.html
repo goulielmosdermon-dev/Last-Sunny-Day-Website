@@ -654,8 +654,7 @@ img { display: block; max-width: 100%; height: auto; }
     <span class="score__icon"></span>
     <span>Soundtrack</span>
   </button>
-  <audio id="score-audio" loop preload="none"
-    src="Last%20Sunny%20Day_files/Music/Nocturnal%20%28From%20Diamonds%20and%20Blues%29.mp3"></audio>
+  <audio id="score-audio" preload="none"></audio>
 </div>
 
 <figure class="header">
@@ -1297,9 +1296,32 @@ img { display: block; max-width: 100%; height: auto; }
   var btn   = wrap.querySelector('.score__btn');
   var audio = document.getElementById('score-audio');
 
+  var dir = 'Last%20Sunny%20Day_files/Music/';
+  var playlist = [
+    'Nocturnal%20%28From%20Diamonds%20and%20Blues%29.mp3',
+    'Farewell%20%28feat.%20Tzeni%20Karezi%29%20%28From%20Diamonds%20and%20Blues%29.mp3',
+    'Diamonds%20and%20Blues%20%28From%20Diamonds%20and%20Blues%29.mp3'
+  ];
+  var track = 0;
+
+  function load(i) {
+    track = (i + playlist.length) % playlist.length;
+    audio.src = dir + playlist[track];
+  }
+
+  // Roll on to the next track, wrapping back to the first.
+  audio.addEventListener('ended', function () {
+    load(track + 1);
+    audio.play().catch(function () {});
+  });
+
   btn.addEventListener('click', function () {
-    if (audio.paused) audio.play().catch(function () {});
-    else audio.pause();
+    if (audio.paused) {
+      if (!audio.src) load(0);
+      audio.play().catch(function () {});
+    } else {
+      audio.pause();
+    }
   });
 
   audio.addEventListener('play', function () {
