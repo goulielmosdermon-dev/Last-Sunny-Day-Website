@@ -1093,16 +1093,21 @@ img { display: block; max-width: 100%; height: auto; }
   var gallery = document.getElementById('gallery');
   var buttons = gallery.querySelectorAll('.gallery__nav button[data-view]');
 
-  Array.prototype.forEach.call(buttons, function (btn) {
-    btn.addEventListener('click', function () {
-      var view = btn.dataset.view;
-      gallery.classList.remove('gallery--gallery', 'gallery--full', 'gallery--grid');
-      gallery.classList.add('gallery--' + view);
-      Array.prototype.forEach.call(buttons, function (b) {
-        b.setAttribute('aria-pressed', String(b === btn));
-      });
+  function setView(view) {
+    gallery.classList.remove('gallery--gallery', 'gallery--full', 'gallery--grid');
+    gallery.classList.add('gallery--' + view);
+    Array.prototype.forEach.call(buttons, function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.view === view));
     });
+  }
+
+  Array.prototype.forEach.call(buttons, function (btn) {
+    btn.addEventListener('click', function () { setView(btn.dataset.view); });
   });
+
+  // Small screens open on Full size - the multi-column views are
+  // unreadable at phone width. The switcher still works from there.
+  if (window.matchMedia('(max-width: 767px)').matches) setView('full');
 })();
 </script>
 
