@@ -1,0 +1,10 @@
+.git
+.DS_Store
+**/.DS_Store
+
+# Original Webflow export - not referenced by index.html.
+# The Header/, Cast/, Grid/, Greek Elvis/ and Font/ folders are kept.
+Last Sunny Day.html
+Last Sunny Day_files/*.js
+Last Sunny Day_files/*.css
+Last Sunny Day_files/css

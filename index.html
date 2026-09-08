@@ -605,7 +605,7 @@ img { display: block; max-width: 100%; height: auto; }
   </p>
 
   <div class="header__still">
-    <video autoplay muted playsinline loop preload="auto">
+    <video autoplay muted playsinline loop preload="auto" width="1080" height="1080">
       <source src="https://player.vimeo.com/progressive_redirect/playback/1224881481/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&amp;log_user=0&amp;signature=a1f6b007c56403caff95f16c30777aeee62d3d2cb5c62c80dd3a4308524b25b7" type="video/mp4">
     </video>
   </div>
@@ -628,31 +628,31 @@ img { display: block; max-width: 100%; height: auto; }
 
 <section class="reel">
   <figure class="reel__item">
-    <video autoplay muted playsinline loop preload="auto">
+    <video muted playsinline loop preload="none">
       <source src="https://player.vimeo.com/progressive_redirect/playback/1180843766/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&amp;log_user=0&amp;signature=98e97783c19442af5bc86343b156d0aabda85bf13c99023fb76f789865eb054d" type="video/mp4">
     </video>
     <figcaption class="reel__caption">SLOW MOTION</figcaption>
   </figure>
   <figure class="reel__item">
-    <video autoplay muted playsinline loop preload="auto">
+    <video muted playsinline loop preload="none">
       <source src="https://player.vimeo.com/progressive_redirect/playback/1180843595/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&amp;log_user=0&amp;signature=5205643bcdaad1355ee71bdfb3ff034ea8b92b0de5aaf030db63eb897f9abc5d" type="video/mp4">
     </video>
     <figcaption class="reel__caption">REAL SQUIBS AND BLOOD</figcaption>
   </figure>
   <figure class="reel__item">
-    <video autoplay muted playsinline loop preload="auto">
+    <video muted playsinline loop preload="none">
       <source src="https://player.vimeo.com/progressive_redirect/playback/1180843664/rendition/720p/file.mp4%20%28720p%29.mp4?loc=external&amp;log_user=0&amp;signature=a62a25e555d34e8a2239300e5f255d28e15ca850097341f545cfd03bb1394946" type="video/mp4">
     </video>
     <figcaption class="reel__caption">HONG KONG ACTION</figcaption>
   </figure>
   <figure class="reel__item">
-    <video autoplay muted playsinline loop preload="auto">
+    <video muted playsinline loop preload="none">
       <source src="https://player.vimeo.com/progressive_redirect/playback/1180855995/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&amp;log_user=0&amp;signature=4d40d40b98db98eb913d2fbdad65a03becc9823b1489091014c5b94b6e2a3987" type="video/mp4">
     </video>
     <figcaption class="reel__caption">CAMERA MOVEMENT</figcaption>
   </figure>
   <figure class="reel__item">
-    <video autoplay muted playsinline loop preload="auto">
+    <video muted playsinline loop preload="none">
       <source src="https://player.vimeo.com/progressive_redirect/playback/1180843501/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&amp;log_user=0&amp;signature=390af6c160c20c875eb70ff5da4b6a7c2dc8578d02dc5f8c25a4fc81952235cc" type="video/mp4">
     </video>
     <figcaption class="reel__caption">ZOOM</figcaption>
@@ -701,6 +701,7 @@ img { display: block; max-width: 100%; height: auto; }
   <div class="elvis__stage">
     <iframe
       id="elvis-player"
+      loading="lazy"
       src="https://player.vimeo.com/video/1180606477?h=c2d261d2a1&amp;controls=0&amp;title=0&amp;byline=0&amp;portrait=0&amp;playsinline=1&amp;dnt=1"
       title="Greek Elvis"
       allow="autoplay; fullscreen; picture-in-picture"
@@ -1195,6 +1196,24 @@ img { display: block; max-width: 100%; height: auto; }
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && box.classList.contains('is-open')) shut();
   });
+})();
+</script>
+
+<script>
+(function () {
+  var clips = document.querySelectorAll('.reel__item video');
+  if (!('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(clips, function (v) { v.play().catch(function () {}); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var v = e.target;
+      if (e.isIntersecting) { v.play().catch(function () {}); }
+      else if (!v.paused) { v.pause(); }
+    });
+  }, { rootMargin: '200% 0px' });
+  Array.prototype.forEach.call(clips, function (v) { io.observe(v); });
 })();
 </script>
 
