@@ -526,16 +526,17 @@ img { display: block; max-width: 100%; height: auto; }
 }
 
 
-/* ---------- Score player ---------- */
+/* ---------- Soundtrack player ---------- */
 .score {
-  display: none;
+  position: fixed;
+  top: 2vw;
+  right: 2.4vw;
+  z-index: 90;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: .7em;
-  margin: 0 0 3.2vw;
+  /* Inverts against whatever scrolls beneath it, light or dark. */
+  mix-blend-mode: difference;
 }
-
-.score.is-available { display: flex; }
 
 .score__btn {
   display: flex;
@@ -546,13 +547,15 @@ img { display: block; max-width: 100%; height: auto; }
   background: none;
   cursor: pointer;
   font-family: "Daito Heading", "Times New Roman", Times, serif;
-  font-size: 1.55vw;
+  font-size: 1.1vw;
   line-height: 1.3;
-  color: #000;
-  transition: color .2s ease;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: opacity .2s ease;
 }
 
-.score__btn:hover { color: #c1553c; }
+.score__btn:hover { opacity: .6; }
 
 .score__icon {
   position: relative;
@@ -621,8 +624,8 @@ img { display: block; max-width: 100%; height: auto; }
   .soundtrack__list li { margin-bottom: 5.5vw; }
   .soundtrack__list a { font-size: 4.4vw; }
 
-  .score { margin-bottom: 9vw; }
-  .score__btn { font-size: 4.4vw; }
+  .score { top: 5vw; right: 5vw; }
+  .score__btn { font-size: 3.2vw; }
 
 
   .gallery { padding-top: 20vw; }
@@ -645,6 +648,15 @@ img { display: block; max-width: 100%; height: auto; }
 </style>
 </head>
 <body id="top">
+
+<div class="score" id="score">
+  <button class="score__btn" type="button" aria-label="Play soundtrack">
+    <span class="score__icon"></span>
+    <span>Soundtrack</span>
+  </button>
+  <audio id="score-audio" loop preload="none"
+    src="Last%20Sunny%20Day_files/Music/Nocturnal%20%28From%20Diamonds%20and%20Blues%29.mp3"></audio>
+</div>
 
 <figure class="header">
   <div class="header__credit">
@@ -822,13 +834,6 @@ img { display: block; max-width: 100%; height: auto; }
 
 <section class="soundtrack">
   <h2 class="soundtrack__heading">Soundtrack</h2>
-
-  <div class="score" id="score">
-    <button class="score__btn" type="button">
-      <span class="score__icon"></span>
-      <span class="score__label">Play score</span>
-    </button>
-  </div>
 
   <!-- Each track links out. Replace href="#" with the track URL. -->
   <ul class="soundtrack__list">
@@ -1285,41 +1290,26 @@ img { display: block; max-width: 100%; height: auto; }
 })();
 </script>
 
+
 <script>
 (function () {
   var wrap  = document.getElementById('score');
   var btn   = wrap.querySelector('.score__btn');
-  var label = wrap.querySelector('.score__label');
-  var dir   = 'Last%20Sunny%20Day_files/Audio/';
-  var names = ['score.mp3', 'score.m4a', 'score.wav', 'score.ogg'];
-  var audio = null;
-
-  // Show the control only if a score file is actually present.
-  (function probe(i) {
-    if (i >= names.length) return;
-    fetch(dir + names[i], { method: 'HEAD' })
-      .then(function (res) {
-        if (!res.ok) return probe(i + 1);
-        audio = new Audio(dir + names[i]);
-        audio.loop = true;
-        audio.preload = 'none';
-        audio.addEventListener('play',  function () {
-          wrap.classList.add('is-playing');
-          label.textContent = 'Pause score';
-        });
-        audio.addEventListener('pause', function () {
-          wrap.classList.remove('is-playing');
-          label.textContent = 'Play score';
-        });
-        wrap.classList.add('is-available');
-      })
-      .catch(function () { probe(i + 1); });
-  })(0);
+  var audio = document.getElementById('score-audio');
 
   btn.addEventListener('click', function () {
-    if (!audio) return;
     if (audio.paused) audio.play().catch(function () {});
     else audio.pause();
+  });
+
+  audio.addEventListener('play', function () {
+    wrap.classList.add('is-playing');
+    btn.setAttribute('aria-label', 'Pause soundtrack');
+  });
+
+  audio.addEventListener('pause', function () {
+    wrap.classList.remove('is-playing');
+    btn.setAttribute('aria-label', 'Play soundtrack');
   });
 })();
 </script>
