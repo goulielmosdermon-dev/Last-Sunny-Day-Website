@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Last Sunny Day Updates</title>
+<style>
+@font-face {
+  font-family: "Daito Heading";
+  src: url("../Last%20Sunny%20Day_files/Font/daito/Daito-NormalRegular.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Daito Body";
+  src: url("../Last%20Sunny%20Day_files/Font/daito/Daito-NormalThin.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: #fff;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.film-link {
+  position: absolute;
+  top: 2vw;
+  left: 2.4vw;
+  z-index: 90;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-size: 1.1vw;
+  line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #000;
+  text-decoration: none;
+  transition: opacity .2s ease;
+}
+.film-link:hover { opacity: .6; }
+
+.header {
+  position: relative;
+  padding: 9vw 0 0;
+  text-align: center;
+}
+
+.header__title {
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 3.4vw;
+  line-height: 1.15;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.prose {
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  margin: 0 auto;
+  padding: 9vw 0 0;
+  width: 63vw;
+  margin-left: 18.5vw;
+}
+
+.prose + .prose { padding-top: 7vw; }
+
+.prose__heading {
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1.55vw;
+  line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin: 0 0 2.6vw;
+}
+
+.prose p,
+.item,
+.update {
+  font-weight: 400;
+  font-size: 1.55vw;
+  line-height: 1.52;
+  margin: 0 0 1.9vw;
+  max-width: 52vw;
+}
+
+.prose p:last-child,
+.item:last-child,
+.update:last-child { margin-bottom: 0; }
+
+.btn {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .38em;
+  margin-left: .85em;
+  white-space: nowrap;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1em;
+  line-height: inherit;
+  letter-spacing: 0;
+  color: #000;
+  text-decoration: none;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  vertical-align: baseline;
+  transition: opacity .2s ease;
+}
+
+.btn:hover { opacity: .55; }
+
+.btn__text {
+  text-decoration: underline;
+  text-underline-offset: .18em;
+  text-decoration-thickness: 1px;
+}
+
+.btn__arrow {
+  font-family: "Times New Roman", Times, serif;
+  text-decoration: none;
+}
+
+.updates { list-style: none; margin: 0; padding: 0; }
+
+.update a {
+  color: #c1553c;
+  text-decoration: underline;
+  text-underline-offset: .12em;
+  transition: opacity .2s ease;
+}
+
+.update a:hover { opacity: .65; }
+
+/* ---------- Finance plan ---------- */
+.finance {
+  padding: 7vw 0 0;
+  width: 63vw;
+  margin-left: 18.5vw;
+}
+
+.finance .prose__heading {
+  margin-bottom: 2.6vw;
+}
+
+.plan-wrap {
+  margin: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.plan {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  font-size: 1.05vw;
+  line-height: 1.15;
+}
+
+.plan th,
+.plan td {
+  border: 1px solid #000;
+  padding: .36vw .85vw;
+  vertical-align: middle;
+  background: #fff;
+}
+
+.plan th {
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  text-align: left;
+  background: #f3f3f3;
+}
+
+.plan thead tr:first-child th,
+.plan thead tr:first-child td { background: #fff; }
+
+.plan .th-note {
+  display: block;
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  font-size: .82em;
+  letter-spacing: 0;
+  margin-top: .2em;
+}
+
+.plan tr.is-head td { background: #fff; }
+
+.plan .col-status { width: 7%; text-align: center; }
+.plan .col-source { width: 38%; }
+.plan .col-type   { width: 18%; }
+.plan .col-amount { width: 20%; }
+.plan .col-pct    { width: 17%; }
+
+.plan .num {
+  text-align: right;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.plan .section-title {
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  letter-spacing: .02em;
+}
+
+.plan .section-title small {
+  display: block;
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  font-size: .85em;
+  margin-top: .15em;
+  letter-spacing: 0;
+}
+
+.plan input,
+.plan select {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: .08vw 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+}
+
+.plan .num input {
+  text-align: right;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+}
+
+.plan select {
+  cursor: pointer;
+  background-image: none;
+}
+
+.plan input:focus,
+.plan select:focus {
+  background: rgba(0,0,0,.05);
+}
+
+.plan input[readonly] {
+  cursor: default;
+  color: inherit;
+}
+.plan input[readonly]:focus { background: transparent; }
+
+.plan .status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: .8em;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-size: 1.05em;
+  line-height: 1;
+  color: #000;
+  cursor: pointer;
+}
+
+.plan .status:hover { opacity: .55; }
+
+.plan tr.is-confirmed td { background: #f6ddd4; }
+.plan tr.is-sub td.num { background: #e5f0d4; }
+.plan tr.is-total td.num { background: #cfe8c4; }
+.plan tr.is-total td {
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+}
+.plan tr.is-diff td { border-top: 0; }
+.plan tr.is-diff .num.is-gap { color: #c1553c; }
+.plan tr.is-diff .num.is-surplus { color: #2f6b32; }
+
+.plan .row-tools {
+  position: relative;
+}
+
+.plan .remove {
+  position: absolute;
+  right: .35vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.4em;
+  height: 1.4em;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #999;
+  font-size: .95em;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .15s ease, color .15s ease;
+}
+
+.plan tr:hover .remove,
+.plan tr:focus-within .remove { opacity: 1; }
+.plan .remove:hover { color: #c1553c; }
+
+.plan .add {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .4em;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-size: .95em;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+}
+.plan .add:hover { opacity: .55; }
+.plan tr.is-add td { background: #fff; border-top: 0; }
+
+.plan-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6vw 2.8vw;
+  margin: 2.2vw 0 0;
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  font-size: 1.15vw;
+  line-height: 1.4;
+}
+
+.plan-meta span { white-space: nowrap; }
+.plan-meta b {
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+}
+
+.footer-space { height: 12vw; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .9s cubic-bezier(.22,1,.36,1),
+              transform .9s cubic-bezier(.22,1,.36,1);
+}
+
+.reveal.is-inview { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .film-link { top: 5vw; left: 5vw; right: auto; font-size: 3.2vw; }
+
+  .header { padding-top: 18vw; }
+  .header__title { font-size: 8.2vw; padding: 0 8vw; }
+
+  .prose { width: auto; margin-left: 0; padding: 16vw 8vw 0; }
+  .prose + .prose { padding-top: 16vw; }
+  .prose__heading { font-size: 4.4vw; margin-bottom: 7vw; }
+  .prose p,
+  .item,
+  .update { font-size: 4.4vw; margin-bottom: 5.5vw; max-width: none; }
+
+  .btn { margin-left: .55em; }
+
+  .finance {
+    width: auto;
+    margin-left: 0;
+    padding: 16vw 8vw 0;
+  }
+  .finance .prose__heading {
+    font-size: 4.4vw;
+    margin-bottom: 7vw;
+  }
+  .plan-wrap { margin: 0; }
+  .plan {
+    min-width: 640px;
+    font-size: 3.2vw;
+  }
+  .plan th, .plan td { padding: 1.3vw 2vw; }
+  .plan .remove { opacity: 1; right: 1vw; }
+  .plan-meta {
+    margin: 6vw 0 0;
+    font-size: 3.6vw;
+    gap: 3vw 5vw;
+  }
+  .footer-space { height: 20vw; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="film-link" href="/">The film</a>
+  <h1 class="header__title reveal">Last Sunny Day Updates</h1>
+</header>
+
+<section class="prose">
+  <h2 class="prose__heading reveal">Creative</h2>
+
+  <p class="item">
+    The project&rsquo;s treatment / pitch deck
+    <a class="btn" href="/">
+      <span class="btn__text">Enter the presentation</span>
+      <span class="btn__arrow" aria-hidden="true">↗</span>
+    </a>
+  </p>
+
+  <p class="item">
+    The most recent draft of the screenplay
+    <a class="btn" href="https://www.dropbox.com/scl/fo/ioy5mcoyt2c8ax8tl1ek4/ABUUWRPRthlVuYdaJpLcq5w?rlkey=lei2mkv6a3bnmvswvnlfofzxx&amp;st=6pfhzp29&amp;dl=0" target="_blank" rel="noopener">
+      <span class="btn__text">Latest draft</span>
+      <span class="btn__arrow" aria-hidden="true">↗</span>
+    </a>
+  </p>
+</section>
+
+<section class="prose">
+  <h2 class="prose__heading reveal">Live updates</h2>
+  <ul class="updates">
+    <li class="update">Shooting is targeting June 2027, depending on financing.</li>
+    <li class="update">Massimo Appolloni is handling casting (credits include The Hand of God, Parthenope, Ferrari, and others).</li>
+    <li class="update"><a href="https://www.instagram.com/giacomogiorgioreal/?hl=en" target="_blank" rel="noopener">Giacomo Giorgio</a> is attached to the film.</li>
+    <li class="update">Initial interest from MK2 at Cannes, with talks to continue once 60&ndash;70% of the budget is in place.</li>
+    <li class="update">Eligible for the tax rebate and EKOME&rsquo;s First Feature Film program.</li>
+  </ul>
+</section>
+
+<section class="finance" id="finance">
+  <h2 class="prose__heading reveal">Finance plan</h2>
+  <div class="plan-wrap">
+    <table class="plan" id="plan">
+      <colgroup>
+        <col class="col-status">
+        <col class="col-source">
+        <col class="col-type">
+        <col class="col-amount">
+        <col class="col-pct">
+      </colgroup>
+      <thead></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="plan-meta" id="plan-meta" aria-live="polite"></div>
+</section>
+
+<div class="footer-space"></div>
+
+<script>
+(function () {
+  var KEY = 'lsd-finance-v1';
+  var TYPES = ['DG', 'MG', 'Grant', 'Equity', 'Tax Incentive', 'Loan', 'Presale', 'Gap'];
+
+  function uid() {
+    return 'r' + Math.random().toString(36).slice(2, 9);
+  }
+
+  function defaults() {
+    return {
+      budget: 850000,
+      sections: [
+        {
+          id: 'marketplace',
+          title: 'Marketplace',
+          rows: [
+            { id: 'm1', confirmed: false, source: 'Greek Distributor', type: 'DG', amount: 20000 },
+            { id: 'm2', confirmed: false, source: 'Italian Distributor', type: 'MG', amount: 20000 }
+          ]
+        },
+        {
+          id: 'equity',
+          title: 'Equity Investors',
+          note: 'Name of company/individual',
+          rows: [
+            { id: 'e1', confirmed: true, source: 'Greece Cash Rebate 40%', type: 'Tax Incentive', amount: 0, auto: 'rebate' },
+            { id: 'e2', confirmed: false, source: 'EKKOMED Grant', type: 'Grant', amount: 320000 },
+            { id: 'e3', confirmed: true, source: 'Producer Contribution', type: 'Equity', amount: 10000 },
+            { id: 'e4', confirmed: false, source: 'Private Investor', type: 'Grant', amount: 250000 },
+            { id: 'e5', confirmed: false, source: 'Private Investor', type: 'Equity', amount: 250000 }
+          ]
+        }
+      ]
+    };
+  }
+
+  function parseMoney(value) {
+    if (typeof value === 'number' && isFinite(value)) return Math.round(value);
+    var s = String(value == null ? '' : value).trim().replace(/[€\s]/g, '');
+    if (!s || s === '-') return 0;
+    var neg = s.charAt(0) === '-';
+    if (neg) s = s.slice(1);
+
+    var hasComma = s.indexOf(',') !== -1;
+    var hasDot = s.indexOf('.') !== -1;
+
+    if (hasComma && hasDot) {
+      if (s.lastIndexOf(',') > s.lastIndexOf('.')) s = s.replace(/\./g, '').replace(',', '.');
+      else s = s.replace(/,/g, '');
+    } else if (hasComma) {
+      var cparts = s.split(',');
+      if (cparts.length === 2 && cparts[1].length <= 2) s = cparts[0].replace(/\./g, '') + '.' + cparts[1];
+      else s = s.replace(/,/g, '');
+    } else if (hasDot) {
+      var dots = s.split('.');
+      if (dots.length > 2 || (dots.length === 2 && dots[1].length === 3)) s = s.replace(/\./g, '');
+    }
+
+    var n = parseFloat(s);
+    if (!isFinite(n)) return 0;
+    return Math.round(neg ? -n : n);
+  }
+
+  function formatMoney(n) {
+    var sign = n < 0 ? '-' : '';
+    return sign + Math.abs(Math.round(n)).toLocaleString('de-DE') + ' \u20AC';
+  }
+
+  function formatPct(amount, budget) {
+    if (!budget) return '\u2014';
+    return (amount / budget * 100).toLocaleString('de-DE', {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1
+    }) + ' %';
+  }
+
+  function isRebate(row) {
+    return !!(row && (row.auto === 'rebate' || row.id === 'e1' || /rebate/i.test(row.source || '')));
+  }
+
+  function rebateRate(row) {
+    var match = String(row && row.source || '').match(/(\d+(?:[.,]\d+)?)\s*%/);
+    if (match) return parseFloat(match[1].replace(',', '.')) / 100;
+    return 0.4;
+  }
+
+  function applyAutos() {
+    state.sections.forEach(function (section) {
+      section.rows.forEach(function (row) {
+        if (!isRebate(row)) return;
+        row.auto = 'rebate';
+        row.amount = Math.round(state.budget * rebateRate(row));
+      });
+    });
+  }
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (!raw) return defaults();
+      var data = JSON.parse(raw);
+      if (!data || !data.sections || !data.sections.length) return defaults();
+      data.budget = parseMoney(data.budget);
+      data.sections.forEach(function (section) {
+        if (!section.id) section.id = uid();
+        section.rows = (section.rows || []).map(function (row) {
+          var next = {
+            id: row.id || uid(),
+            confirmed: !!row.confirmed,
+            source: row.source || '',
+            type: row.type || 'Grant',
+            amount: parseMoney(row.amount)
+          };
+          if (row.auto === 'rebate' || next.id === 'e1' || /rebate/i.test(next.source)) next.auto = 'rebate';
+          return next;
+        });
+      });
+      return data;
+    } catch (err) {
+      return defaults();
+    }
+  }
+
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (err) {}
+  }
+
+  var state = load();
+  var table = document.getElementById('plan');
+  var thead = table.querySelector('thead');
+  var tbody = table.querySelector('tbody');
+  var meta = document.getElementById('plan-meta');
+  var editing = null;
+
+  function typeSelect(current) {
+    var html = '<select data-field="type" aria-label="Type of finance">';
+    var seen = false;
+    TYPES.forEach(function (t) {
+      if (t === current) seen = true;
+      html += '<option value="' + t + '"' + (t === current ? ' selected' : '') + '>' + t + '</option>';
+    });
+    if (current && !seen) {
+      html += '<option value="' + current.replace(/"/g, '') + '" selected>' + current + '</option>';
+    }
+    html += '</select>';
+    return html;
+  }
+
+  function escapeAttr(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;');
+  }
+
+  function render() {
+    applyAutos();
+    thead.innerHTML =
+      '<tr>' +
+        '<th></th>' +
+        '<th class="section-title">Total Budget</th>' +
+        '<td class="num" colspan="3">' +
+          '<input data-field="budget" inputmode="decimal" aria-label="Total budget" value="' + escapeAttr(formatMoney(state.budget)) + '">' +
+        '</td>' +
+      '</tr>' +
+      '<tr>' +
+        '<th class="col-status">Status<span class="th-note">(x = confirmed)</span></th>' +
+        '<th>Source of finance<span class="th-note">(Name of company/individual)</span></th>' +
+        '<th>Type of finance</th>' +
+        '<th class="num">Amount</th>' +
+        '<th class="num">% of Budget</th>' +
+      '</tr>';
+
+    var html = '';
+    state.sections.forEach(function (section) {
+      html +=
+        '<tr class="is-head">' +
+          '<td></td>' +
+          '<td class="section-title" colspan="4">' + section.title +
+            (section.note ? '<small>' + section.note + '</small>' : '') +
+          '</td>' +
+        '</tr>';
+
+      section.rows.forEach(function (row) {
+        var auto = isRebate(row);
+        html +=
+          '<tr data-section="' + section.id + '" data-row="' + row.id + '"' + (row.confirmed ? ' class="is-confirmed"' : '') + '>' +
+            '<td class="col-status">' +
+              '<button class="status" type="button" data-field="confirmed" aria-pressed="' + row.confirmed + '" aria-label="Confirmed">' +
+                (row.confirmed ? 'x' : '') +
+              '</button>' +
+            '</td>' +
+            '<td class="row-tools">' +
+              '<input data-field="source" aria-label="Source of finance" value="' + escapeAttr(row.source) + '">' +
+              '<button class="remove" type="button" data-action="remove" aria-label="Remove source">&times;</button>' +
+            '</td>' +
+            '<td>' + typeSelect(row.type) + '</td>' +
+            '<td class="num">' +
+              (auto
+                ? '<input data-field="amount" data-auto="rebate" readonly tabindex="-1" aria-label="Amount, 40% of total budget" value="' + escapeAttr(formatMoney(row.amount)) + '">'
+                : '<input data-field="amount" inputmode="decimal" aria-label="Amount" value="' + escapeAttr(formatMoney(row.amount)) + '">') +
+            '</td>' +
+            '<td class="num" data-pct></td>' +
+          '</tr>';
+      });
+
+      html +=
+        '<tr class="is-sub" data-sub="' + section.id + '">' +
+          '<td></td>' +
+          '<td>Sub-total</td>' +
+          '<td></td>' +
+          '<td class="num" data-amount></td>' +
+          '<td class="num" data-pct></td>' +
+        '</tr>' +
+        '<tr class="is-add">' +
+          '<td></td>' +
+          '<td colspan="4"><button class="add" type="button" data-action="add" data-section="' + section.id + '">+ Add source</button></td>' +
+        '</tr>';
+    });
+
+    html +=
+      '<tr class="is-total">' +
+        '<td></td>' +
+        '<td>TOTAL</td>' +
+        '<td></td>' +
+        '<td class="num" data-grand-amount></td>' +
+        '<td class="num" data-grand-pct></td>' +
+      '</tr>' +
+      '<tr class="is-diff">' +
+        '<td></td>' +
+        '<td></td>' +
+        '<td class="num" style="text-align:right">Difference to budget</td>' +
+        '<td class="num" data-diff></td>' +
+        '<td></td>' +
+      '</tr>';
+
+    tbody.innerHTML = html;
+    recalc();
+  }
+
+  function findRow(sectionId, rowId) {
+    var section = state.sections.filter(function (s) { return s.id === sectionId; })[0];
+    if (!section) return null;
+    var row = section.rows.filter(function (r) { return r.id === rowId; })[0];
+    return { section: section, row: row };
+  }
+
+  function recalc() {
+    applyAutos();
+    var budget = state.budget;
+    var grand = 0;
+    var confirmed = 0;
+
+    state.sections.forEach(function (section) {
+      var sub = 0;
+      section.rows.forEach(function (row) {
+        sub += row.amount;
+        if (row.confirmed) confirmed += row.amount;
+        var tr = tbody.querySelector('[data-row="' + row.id + '"]');
+        if (!tr) return;
+        tr.classList.toggle('is-confirmed', row.confirmed);
+        var status = tr.querySelector('[data-field="confirmed"]');
+        if (status) {
+          status.textContent = row.confirmed ? 'x' : '';
+          status.setAttribute('aria-pressed', String(row.confirmed));
+        }
+        var amountInput = tr.querySelector('[data-field="amount"]');
+        if (amountInput && amountInput !== editing) amountInput.value = formatMoney(row.amount);
+        var pct = tr.querySelector('[data-pct]');
+        if (pct) pct.textContent = formatPct(row.amount, budget);
+      });
+      grand += sub;
+      var subRow = tbody.querySelector('[data-sub="' + section.id + '"]');
+      if (subRow) {
+        subRow.querySelector('[data-amount]').textContent = formatMoney(sub);
+        subRow.querySelector('[data-pct]').textContent = formatPct(sub, budget);
+      }
+    });
+
+    var diff = budget - grand;
+    var grandAmount = tbody.querySelector('[data-grand-amount]');
+    var grandPct = tbody.querySelector('[data-grand-pct]');
+    var diffCell = tbody.querySelector('[data-diff]');
+    if (grandAmount) grandAmount.textContent = formatMoney(grand);
+    if (grandPct) grandPct.textContent = formatPct(grand, budget);
+    if (diffCell) {
+      diffCell.textContent = formatMoney(diff);
+      diffCell.classList.toggle('is-gap', diff > 0);
+      diffCell.classList.toggle('is-surplus', diff < 0);
+    }
+
+    meta.innerHTML =
+      '<span>Confirmed <b>' + formatMoney(confirmed) + '</b></span>' +
+      '<span>In discussion <b>' + formatMoney(grand - confirmed) + '</b></span>' +
+      '<span>Covered <b>' + formatPct(grand, budget) + '</b></span>';
+
+    save();
+  }
+
+  function setEditing(input, raw) {
+    editing = input;
+    input.value = raw === 0 ? '0' : String(raw);
+    input.select();
+  }
+
+  function commitMoney(input) {
+    var field = input.getAttribute('data-field');
+    if (field === 'budget') {
+      state.budget = parseMoney(input.value);
+      input.value = formatMoney(state.budget);
+      editing = null;
+      recalc();
+    }
+    if (field === 'amount') {
+      var tr = input.closest('tr');
+      if (!tr) return;
+      var found = findRow(tr.getAttribute('data-section'), tr.getAttribute('data-row'));
+      if (found && found.row && !isRebate(found.row)) {
+        found.row.amount = parseMoney(input.value);
+        input.value = formatMoney(found.row.amount);
+      }
+      editing = null;
+      recalc();
+    }
+  }
+
+  table.addEventListener('focusin', function (e) {
+    var input = e.target.closest('input');
+    if (!input) return;
+    var field = input.getAttribute('data-field');
+    if (field === 'budget') setEditing(input, state.budget);
+    if (field === 'amount') {
+      if (input.readOnly) return;
+      var tr = input.closest('tr');
+      var found = findRow(tr.getAttribute('data-section'), tr.getAttribute('data-row'));
+      if (found && found.row) setEditing(input, found.row.amount);
+    }
+  });
+
+  table.addEventListener('blur', function (e) {
+    var input = e.target;
+    if (!input || !input.getAttribute) return;
+    var field = input.getAttribute('data-field');
+    if (field === 'budget' || field === 'amount') commitMoney(input);
+  }, true);
+
+  table.addEventListener('input', function (e) {
+    var el = e.target;
+    var field = el.getAttribute('data-field');
+    if (!field) return;
+    if (field === 'budget') {
+      state.budget = parseMoney(el.value);
+      recalc();
+      return;
+    }
+    var tr = el.closest('tr');
+    if (!tr || !tr.getAttribute('data-row')) return;
+    var found = findRow(tr.getAttribute('data-section'), tr.getAttribute('data-row'));
+    if (!found || !found.row) return;
+    if (field === 'amount' && !isRebate(found.row)) found.row.amount = parseMoney(el.value);
+    if (field === 'source') found.row.source = el.value;
+    if (field === 'type') found.row.type = el.value;
+    recalc();
+  });
+
+  table.addEventListener('change', function (e) {
+    var el = e.target;
+    if (el.getAttribute('data-field') !== 'type') return;
+    var tr = el.closest('tr');
+    var found = findRow(tr.getAttribute('data-section'), tr.getAttribute('data-row'));
+    if (found && found.row) {
+      found.row.type = el.value;
+      save();
+    }
+  });
+
+  table.addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var action = btn.getAttribute('data-action');
+    var field = btn.getAttribute('data-field');
+
+    if (field === 'confirmed') {
+      var tr = btn.closest('tr');
+      var found = findRow(tr.getAttribute('data-section'), tr.getAttribute('data-row'));
+      if (found && found.row) {
+        found.row.confirmed = !found.row.confirmed;
+        recalc();
+      }
+      return;
+    }
+
+    if (action === 'add') {
+      var section = state.sections.filter(function (s) { return s.id === btn.getAttribute('data-section'); })[0];
+      if (!section) return;
+      section.rows.push({ id: uid(), confirmed: false, source: '', type: 'Grant', amount: 0 });
+      render();
+      var newest = tbody.querySelector('[data-row="' + section.rows[section.rows.length - 1].id + '"] [data-field="source"]');
+      if (newest) newest.focus();
+      return;
+    }
+
+    if (action === 'remove') {
+      var rowEl = btn.closest('tr');
+      var pair = findRow(rowEl.getAttribute('data-section'), rowEl.getAttribute('data-row'));
+      if (!pair) return;
+      pair.section.rows = pair.section.rows.filter(function (r) { return r.id !== pair.row.id; });
+      render();
+    }
+  });
+
+  table.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter') return;
+    var input = e.target.closest('input');
+    if (!input) return;
+    e.preventDefault();
+    commitMoney(input);
+    input.blur();
+  });
+
+  render();
+})();
+</script>
+
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var headings = document.querySelectorAll('.reveal');
+  var copy = document.querySelectorAll('.item, .update, .prose p:not(.item)');
+
+  Array.prototype.forEach.call(copy, function (el) { el.classList.add('reveal'); });
+
+  var targets = Array.prototype.slice.call(headings)
+    .concat(Array.prototype.slice.call(copy));
+
+  if (reduced || !('IntersectionObserver' in window)) {
+    targets.forEach(function (t) { t.classList.add('is-inview'); });
+    return;
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-inview');
+      io.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+
+  targets.forEach(function (t) { io.observe(t); });
+})();
+</script>
+
+</body>
+</html>
