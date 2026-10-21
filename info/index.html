@@ -18,6 +18,7 @@
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+:root { --yellow: #ff0; }
 body {
   position: relative;
   overflow-x: hidden;
@@ -27,7 +28,7 @@ body {
 }
 
 .film-link {
-  position: absolute;
+  position: fixed;
   top: 2vw;
   left: 2.4vw;
   z-index: 90;
@@ -37,13 +38,16 @@ body {
   letter-spacing: .04em;
   text-transform: uppercase;
   color: #000;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .12em;
+  text-decoration-skip-ink: none;
   transition: opacity .2s ease;
 }
 .film-link:hover { opacity: .6; }
 
 .header {
-  position: relative;
   padding: 9vw 0 0;
   text-align: center;
 }
@@ -273,15 +277,15 @@ body {
 
 .plan .status:hover { opacity: .55; }
 
-.plan tr.is-confirmed td { background: #f6ddd4; }
-.plan tr.is-sub td.num { background: #e5f0d4; }
-.plan tr.is-total td.num { background: #cfe8c4; }
+.plan tr.is-confirmed td { background: var(--yellow); }
+.plan tr.is-sub td.num { background: #d9ecea; }
+.plan tr.is-total td.num { background: #c3e0dd; }
 .plan tr.is-total td {
   font-family: "Daito Heading", "Times New Roman", Times, serif;
 }
 .plan tr.is-diff td { border-top: 0; }
 .plan tr.is-diff .num.is-gap { color: #c1553c; }
-.plan tr.is-diff .num.is-surplus { color: #2f6b32; }
+.plan tr.is-diff .num.is-surplus { color: #3a6f6c; }
 
 .plan .row-tools {
   position: relative;
@@ -403,8 +407,9 @@ body {
 </head>
 <body>
 
+<a class="film-link" href="/">The film</a>
+
 <header class="header">
-  <a class="film-link" href="/">The film</a>
   <h1 class="header__title reveal">Last Sunny Day Updates</h1>
 </header>
 

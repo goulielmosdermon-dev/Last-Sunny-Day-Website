@@ -19,6 +19,7 @@
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+:root { --yellow: #ff0; }
 body { overflow-x: hidden; }
 figure, figcaption { margin: 0; }
 body {
@@ -59,6 +60,24 @@ img { display: block; max-width: 100%; height: auto; }
   display: block;
 }
 
+.header__still::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 48%;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.82) 0%,
+    rgba(0,0,0,.5) 38%,
+    rgba(0,0,0,.18) 70%,
+    rgba(0,0,0,0) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
 .header__title {
   position: absolute;
   left: 50%;
@@ -68,6 +87,7 @@ img { display: block; max-width: 100%; height: auto; }
   margin: 0;
   pointer-events: none;
   mix-blend-mode: lighten;
+  z-index: 2;
 }
 
 .header__title img,
@@ -89,6 +109,7 @@ img { display: block; max-width: 100%; height: auto; }
   text-align: center;
   pointer-events: none;
   mix-blend-mode: lighten;
+  z-index: 2;
 }
 
 .header__credit img { width: 30%; }
@@ -168,54 +189,99 @@ img { display: block; max-width: 100%; height: auto; }
 
 
 /* ---------- Cast ---------- */
-.cast { padding-top: 9vw; }
-
-.cast__member {
+.cast {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.2vw 2vw;
+  width: 63vw;
   margin-left: 18.5vw;
-  padding-bottom: 9vw;
+  padding: 9vw 0 0;
+}
+
+.cast__member { margin: 0; padding: 0; }
+
+.cast__photo {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
 }
 
 .cast__portrait {
-  width: 15vw;
+  width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  margin: 0 0 4.6vw;
+  margin: 0;
+}
+
+.cast__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .35em .85em;
+  margin-top: 1.15vw;
 }
 
 .cast__role {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 400;
+}
+
+.cast__name {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .4em;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
   font-family: "Daito Heading", "Times New Roman", Times, serif;
   font-weight: 400;
-  font-size: 1.55vw;
+  font-size: 1.15vw;
   line-height: 1.3;
   letter-spacing: .04em;
   text-transform: uppercase;
-  margin: 0 0 2.6vw;
+  color: #000;
 }
 
-.cast__member p {
-  font-family: "Daito Body", "Times New Roman", Times, serif;
+.cast__plus {
+  font-size: 1.05em;
+  line-height: 1;
   font-weight: 400;
-  font-size: 1.55vw;
-  line-height: 1.52;
-  margin: 0 0 1.9vw;
-  max-width: 46vw;
 }
 
-.cast__status {
+.cast__attached {
   font-family: "Daito Body", "Times New Roman", Times, serif;
-  font-size: 1.55vw;
-  line-height: 1.52;
-  margin: 4.4vw 0 0;
-}
-
-.cast__status--attached {
-  color: #c1553c;
-  text-decoration: underline;
-  text-underline-offset: .12em;
+  font-size: 1.05vw;
+  line-height: 1.3;
+  color: #000;
+  text-decoration: none;
+  background: var(--yellow);
+  padding: 0 .18em;
   transition: opacity .2s ease;
 }
 
-.cast__status--attached:hover { opacity: .65; }
+.cast__attached:hover { opacity: .65; }
+
+.cast__bio {
+  display: none;
+  margin-top: 1vw;
+}
+
+.cast__bio p {
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1.05vw;
+  line-height: 1.45;
+  margin: 0 0 1em;
+}
+
+.cast__bio p:last-child { margin-bottom: 0; }
+
+.cast__member.is-open .cast__bio { display: block; }
 
 
 /* ---------- Greek Elvis ---------- */
@@ -346,8 +412,9 @@ img { display: block; max-width: 100%; height: auto; }
 
 /* ---------- Soundtrack ---------- */
 .soundtrack {
-  padding: 9vw 6vw;
-  text-align: center;
+  width: 63vw;
+  margin-left: 18.5vw;
+  padding: 9vw 0 0;
   font-family: "Daito Body", "Times New Roman", Times, serif;
 }
 
@@ -356,30 +423,107 @@ img { display: block; max-width: 100%; height: auto; }
   font-weight: 400;
   font-size: 1.55vw;
   line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
   margin: 0 0 3.2vw;
 }
 
 .soundtrack__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.4vw 1.6vw;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.soundtrack__list li { margin: 0 0 1.9vw; }
-.soundtrack__list li:last-child { margin-bottom: 0; }
-
-.soundtrack__list a {
-  font-size: 1.55vw;
+.soundtrack__btn {
+  display: flex;
+  align-items: center;
+  gap: .55em;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  font-size: 1.05vw;
   line-height: 1.3;
   color: #000;
-  text-decoration: none;
+}
+
+.soundtrack__icon {
+  position: relative;
+  width: .62em;
+  height: .74em;
+  flex: none;
+  color: #000;
   transition: color .2s ease;
 }
 
-.soundtrack__list a:hover {
-  color: #c1553c;
-  text-decoration: underline;
-  text-underline-offset: .12em;
+.soundtrack__btn:hover .soundtrack__icon {
+  color: var(--yellow);
+}
+
+.soundtrack__icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.soundtrack__icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(currentColor, currentColor) left / 32% 100% no-repeat,
+    linear-gradient(currentColor, currentColor) right / 32% 100% no-repeat;
+  opacity: 0;
+}
+
+.soundtrack__btn.is-playing .soundtrack__icon::before { opacity: 0; }
+.soundtrack__btn.is-playing .soundtrack__icon::after  { opacity: 1; }
+
+.soundtrack__name {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+
+/* ---------- Movie references ---------- */
+.refs {
+  width: 63vw;
+  margin-left: 18.5vw;
+  padding: 9vw 0 12vw;
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+}
+
+.refs__heading {
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1.55vw;
+  line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin: 0 0 3.2vw;
+}
+
+.refs__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.4vw 1.6vw;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.refs__list li {
+  font-size: 1.05vw;
+  line-height: 1.3;
 }
 
 
@@ -419,10 +563,11 @@ img { display: block; max-width: 100%; height: auto; }
   background: #000;
   padding: 1.1vw 2.2vw;
   margin-top: 10px;
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
   font-size: .78vw;
-  letter-spacing: .06em;
+  letter-spacing: .04em;
   text-transform: uppercase;
+  color: #fff;
 }
 
 .gallery__nav button,
@@ -435,15 +580,15 @@ img { display: block; max-width: 100%; height: auto; }
   letter-spacing: inherit;
   text-transform: inherit;
   text-decoration: none;
-  color: #6e6e6e;
+  color: #fff;
   cursor: pointer;
-  transition: color .2s ease;
+  transition: opacity .2s ease;
 }
 
+.gallery__nav button { opacity: .5; }
 .gallery__nav button:hover,
-.gallery__nav a:hover { color: #b8b8b8; }
-
-.gallery__nav [aria-pressed="true"] { color: #fff; }
+.gallery__nav a:hover { opacity: .65; }
+.gallery__nav [aria-pressed="true"] { opacity: 1; }
 
 .gallery__nav-left  { justify-self: start;  text-align: left; }
 .gallery__nav-mid   { justify-self: center; text-align: center; }
@@ -642,6 +787,69 @@ img { display: block; max-width: 100%; height: auto; }
 
 .live__btn:hover { opacity: .6; }
 
+.nav {
+  position: fixed;
+  top: 2vw;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  mix-blend-mode: difference;
+  text-align: center;
+}
+
+.nav__btn {
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-size: 1.1vw;
+  line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.nav__list {
+  position: fixed;
+  top: 3.5vw;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  display: none;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1.5vw;
+  list-style: none;
+  margin: 0;
+  padding: .4vw 0 0;
+  background: none;
+  text-align: center;
+}
+
+.nav__list.is-open { display: flex; }
+
+.nav__list a {
+  display: block;
+  padding: 0;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1.05vw;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: .18em;
+  text-decoration-thickness: 1px;
+  transition: opacity .2s ease;
+  white-space: nowrap;
+}
+
+.nav__list a:hover { opacity: .55; }
+
 /* ---------- Mobile ---------- */
 @media (max-width: 767px) {
   .header { padding-top: 14vw; }
@@ -665,12 +873,18 @@ img { display: block; max-width: 100%; height: auto; }
   .reel { margin-top: 20vw; }
   .reel__caption { font-size: 5.4vw; }
 
-  .cast { padding-top: 20vw; }
-  .cast__member { margin-left: 0; padding: 0 8vw 20vw; }
-  .cast__portrait { width: 46vw; margin-bottom: 12vw; }
-  .cast__role { font-size: 4.4vw; margin-bottom: 7vw; }
-  .cast__member p { font-size: 4.4vw; margin-bottom: 5.5vw; max-width: none; }
-  .cast__status { font-size: 4.4vw; margin-top: 10vw; }
+  .cast {
+    grid-template-columns: 1fr;
+    gap: 10vw;
+    width: auto;
+    margin-left: 0;
+    padding: 20vw 8vw 0;
+  }
+  .cast__meta { margin-top: 4vw; }
+  .cast__name { font-size: 4.4vw; }
+  .cast__attached { font-size: 4vw; }
+  .cast__bio { margin-top: 4vw; }
+  .cast__bio p { font-size: 4.4vw; }
 
   .elvis { margin-top: 20vw; }
   .elvis__watch { font-size: 5.4vw; }
@@ -678,15 +892,30 @@ img { display: block; max-width: 100%; height: auto; }
   .elvis__toggle { width: 3.4vw; height: 4vw; }
   .elvis__track { height: 4vw; }
 
-  .soundtrack { padding: 20vw 8vw; }
+  .soundtrack { width: auto; margin-left: 0; padding: 20vw 8vw 0; }
   .soundtrack__heading { font-size: 4.4vw; margin-bottom: 9vw; }
-  .soundtrack__list li { margin-bottom: 5.5vw; }
-  .soundtrack__list a { font-size: 4.4vw; }
+  .soundtrack__list { grid-template-columns: 1fr; gap: 5.5vw; }
+  .soundtrack__btn { font-size: 4.4vw; }
+
+  .refs { width: auto; margin-left: 0; padding: 20vw 8vw 16vw; }
+  .refs__heading { font-size: 4.4vw; margin-bottom: 9vw; }
+  .refs__list { grid-template-columns: 1fr; gap: 5.5vw; }
+  .refs__list li { font-size: 4.4vw; }
 
   .score { top: 5vw; right: 5vw; }
   .score__btn { font-size: 3.2vw; }
   .live { top: 5vw; left: 5vw; }
   .live__btn { font-size: 3.2vw; }
+  .nav { top: 5vw; }
+  .nav__btn { font-size: 3.2vw; }
+  .nav__list {
+    top: 10vw;
+    flex-wrap: wrap;
+    gap: 3vw 4vw;
+    max-width: 92vw;
+    padding: 1.5vw 0 0;
+  }
+  .nav__list a { font-size: 4.4vw; }
 
 
   .gallery { padding-top: 20vw; }
@@ -713,6 +942,18 @@ img { display: block; max-width: 100%; height: auto; }
 <a class="live" href="/info">
   <span class="live__btn">Live updates</span>
 </a>
+
+<nav class="nav">
+  <button class="nav__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="site-nav-list">Menu</button>
+</nav>
+<ul class="nav__list" id="site-nav-list">
+  <li><a href="#personal">Make it personal</a></li>
+  <li><a href="#inspiration">Inspiration</a></li>
+  <li><a href="#cast">Cast</a></li>
+  <li><a href="#greek-elvis">Greek Elvis</a></li>
+  <li><a href="#soundtrack">Soundtrack</a></li>
+  <li><a href="#gallery">References</a></li>
+</ul>
 
 <div class="score" id="score">
   <button class="score__btn" type="button" aria-label="Play soundtrack">
@@ -747,7 +988,7 @@ img { display: block; max-width: 100%; height: auto; }
   </div>
 </figure>
 
-<section class="prose">
+<section class="prose" id="personal">
   <h2 class="prose__heading">Make it personal</h2>
   <p>Growing up, I spent my days on the street, at parks and beaches, making short action films with my friends, playing with toy guns, cycling around town, and falling in love for the first time. We were young and free, and I try to carry that freedom as much as I can in my stories and my characters.</p>
   <p>I grew up renting DVDs with my dad at the local video club. My parents took me to the cinema to watch every kind of movie, but the film that changed everything was "The Hateful Eight" in 2015. I was 15 years old and had already been making short films with my best friends. That day, I decided to take myself seriously.</p>
@@ -755,7 +996,7 @@ img { display: block; max-width: 100%; height: auto; }
   <p>That&rsquo;s why I&rsquo;m making the film I want to see on the big screen. Gritty, emotional, thrilling, and personal.</p>
 </section>
 
-<section class="prose">
+<section class="prose" id="inspiration">
   <h2 class="prose__heading">Inspiration</h2>
   <p>What draws me to this film is the stories of childhood friendship and nostalgia, like those in Spielberg&rsquo;s work. I&rsquo;m equally inspired by the romance and rebellion of Jean-Luc Godard, the poetic sadness of Kieslowski and Theo Angelopoulos, and the explosive violence of John Woo and Park Chan-wook. I also admire the sharp wit and blood-soaked tension of Japanese cinema, like the films of Toshiya Fujita and Masaki Kobayashi.</p>
   <p>These are the types of characters I want to bring to the screen: flawed, brutal, unaware of how broken they truly are. I want to see them confront that truth. To test their bonds. To ask what happens when violence is no longer the answer, and friendship is all that remains.</p>
@@ -795,41 +1036,89 @@ img { display: block; max-width: 100%; height: auto; }
   </figure>
 </section>
 
-<section class="cast">
+<section class="cast" id="cast">
   <article class="cast__member">
-    <img class="cast__portrait" src="Last Sunny Day_files/Cast/Francesco Pistone.png" alt="Oliver">
-    <h2 class="cast__role">Oliver</h2>
-    <p>Late 20s. Italian. A quiet storm behind dark sunglasses. Oliver moves like someone carrying a ghost&mdash;measured, watchful, haunted by stillness. His illness has dulled the sharpness of his hitman edge, replacing it with melancholy introspection. Beneath the black suit and cigarette smoke is a boy who once loved gently, now trapped between duty and death. Thoughtful and empathetic, but capable of lethal precision, Oliver is a man trying to make peace with the past before it buries him.</p>
-    <p class="cast__status"><a class="cast__status--attached" href="https://www.rbcasting.com/rb/en/web/francescopistone" target="_blank" rel="noopener">Francesco Pistone Attached</a></p>
+    <button class="cast__photo" type="button" aria-expanded="false" aria-controls="bio-oliver" aria-label="Oliver">
+      <img class="cast__portrait" src="Last Sunny Day_files/Cast/Francesco Pistone.png" alt="">
+    </button>
+    <div class="cast__meta">
+      <h2 class="cast__role">
+        <button class="cast__name" type="button" aria-expanded="false" aria-controls="bio-oliver">
+          Oliver <span class="cast__plus" aria-hidden="true">+</span>
+        </button>
+      </h2>
+      <a class="cast__attached" href="https://www.rbcasting.com/rb/en/web/francescopistone" target="_blank" rel="noopener">Francesco Pistone Attached</a>
+    </div>
+    <div class="cast__bio" id="bio-oliver">
+      <p>Late 20s. Italian. A quiet storm behind dark sunglasses. Oliver moves like someone carrying a ghost&mdash;measured, watchful, haunted by stillness. His illness has dulled the sharpness of his hitman edge, replacing it with melancholy introspection. Beneath the black suit and cigarette smoke is a boy who once loved gently, now trapped between duty and death. Thoughtful and empathetic, but capable of lethal precision, Oliver is a man trying to make peace with the past before it buries him.</p>
+    </div>
   </article>
 
   <article class="cast__member">
-    <img class="cast__portrait" src="Last Sunny Day_files/Cast/Giacomo Giorgio.png" alt="Giorgio">
-    <h2 class="cast__role">Giorgio</h2>
-    <p>Male, late 20s, Italian. Giorgio is volatile, expressive, and emotionally raw. He covers his wounds with swagger, jokes, and sudden violence. Beneath his bravado is a desperate need for connection.<br>More impulsive than Oliver and more broken than he admits, Giorgio is loyal to a fault. He&rsquo;s like a stray dog who found a pack. Torn between tenderness and brutality, Giorgio carries his trauma with the charm of a boy pretending not to care.</p>
-    <p class="cast__status"><a class="cast__status--attached" href="https://www.instagram.com/giacomogiorgioreal/?hl=en" target="_blank" rel="noopener">Giacomo Giorgio Attached</a></p>
+    <button class="cast__photo" type="button" aria-expanded="false" aria-controls="bio-giorgio" aria-label="Giorgio">
+      <img class="cast__portrait" src="Last Sunny Day_files/Cast/Giacomo Giorgio.png" alt="">
+    </button>
+    <div class="cast__meta">
+      <h2 class="cast__role">
+        <button class="cast__name" type="button" aria-expanded="false" aria-controls="bio-giorgio">
+          Giorgio <span class="cast__plus" aria-hidden="true">+</span>
+        </button>
+      </h2>
+      <a class="cast__attached" href="https://www.instagram.com/giacomogiorgioreal/?hl=en" target="_blank" rel="noopener">Giacomo Giorgio Attached</a>
+    </div>
+    <div class="cast__bio" id="bio-giorgio">
+      <p>Male, late 20s, Italian. Giorgio is volatile, expressive, and emotionally raw. He covers his wounds with swagger, jokes, and sudden violence. Beneath his bravado is a desperate need for connection.<br>More impulsive than Oliver and more broken than he admits, Giorgio is loyal to a fault. He&rsquo;s like a stray dog who found a pack. Torn between tenderness and brutality, Giorgio carries his trauma with the charm of a boy pretending not to care.</p>
+    </div>
   </article>
 
   <article class="cast__member">
-    <img class="cast__portrait" src="Last Sunny Day_files/Cast/Anna.webp" alt="Anna">
-    <h2 class="cast__role">Anna</h2>
-    <p>Female, early 20s, Greek. A survivor forged in captivity. Anna is quiet but not weak. Beneath her silence is a storm of rage, grief, and defiant will. Once trafficked, now escaped, she moves like a ghost reclaiming her own story. Her presence disrupts everything. She is the moral center of the film&mdash;a mirror to the men&rsquo;s brutality, and a force with more to lose, and more courage to act.</p>
-    <p class="cast__status">Not Attached</p>
+    <button class="cast__photo" type="button" aria-expanded="false" aria-controls="bio-anna" aria-label="Anna">
+      <img class="cast__portrait" src="Last Sunny Day_files/Cast/Anna.webp" alt="">
+    </button>
+    <div class="cast__meta">
+      <h2 class="cast__role">
+        <button class="cast__name" type="button" aria-expanded="false" aria-controls="bio-anna">
+          Anna <span class="cast__plus" aria-hidden="true">+</span>
+        </button>
+      </h2>
+    </div>
+    <div class="cast__bio" id="bio-anna">
+      <p>Female, early 20s, Greek. A survivor forged in captivity. Anna is quiet but not weak. Beneath her silence is a storm of rage, grief, and defiant will. Once trafficked, now escaped, she moves like a ghost reclaiming her own story. Her presence disrupts everything. She is the moral center of the film&mdash;a mirror to the men&rsquo;s brutality, and a force with more to lose, and more courage to act.</p>
+    </div>
   </article>
 
   <article class="cast__member">
-    <img class="cast__portrait" src="Last Sunny Day_files/Cast/Frank.jpg" alt="Frank">
-    <h2 class="cast__role">Frank</h2>
-    <p>Male, late 50s to early 60s, Italian. A godfather stripped of glamour. Frank is cold, mechanical, and emotionless. He issues commands, not conversation. His evil feels bureaucratic&mdash;efficient, orderly, and deeply embedded.</p>
-    <p>Frank turns children into soldiers and death into a business. He thrives on control, loyalty, and silence. A funeral director by trade and a manipulator by nature, he is the past refusing to stay buried. A puppet master hidden behind veils and empty coffins.</p>
-    <p class="cast__status">Not Attached</p>
+    <button class="cast__photo" type="button" aria-expanded="false" aria-controls="bio-frank" aria-label="Frank">
+      <img class="cast__portrait" src="Last Sunny Day_files/Cast/Frank.jpg" alt="">
+    </button>
+    <div class="cast__meta">
+      <h2 class="cast__role">
+        <button class="cast__name" type="button" aria-expanded="false" aria-controls="bio-frank">
+          Frank <span class="cast__plus" aria-hidden="true">+</span>
+        </button>
+      </h2>
+    </div>
+    <div class="cast__bio" id="bio-frank">
+      <p>Male, late 50s to early 60s, Italian. A godfather stripped of glamour. Frank is cold, mechanical, and emotionless. He issues commands, not conversation. His evil feels bureaucratic&mdash;efficient, orderly, and deeply embedded.</p>
+      <p>Frank turns children into soldiers and death into a business. He thrives on control, loyalty, and silence. A funeral director by trade and a manipulator by nature, he is the past refusing to stay buried. A puppet master hidden behind veils and empty coffins.</p>
+    </div>
   </article>
 
   <article class="cast__member">
-    <img class="cast__portrait" src="Last Sunny Day_files/Greek Elvis/Greek Elvis Thumnail.png" alt="Greek Elvis">
-    <h2 class="cast__role">Greek Elvis</h2>
-    <p>Male, 40s&ndash;50s, Greek. A grotesque relic of showbiz and sleaze. Greek Elvis is trapped in a fantasy version of himself, a tragic parody of faded fame. Rhinestones, sweat, and menace define his surface. Beneath it, he is both predator and coward&mdash;hiding cruelty behind flamboyant theatrics.<br>To outsiders, he is a joke. To those under his control, he is a nightmare. His glittering stage persona masks a violent core. He is entertainment turned rotten, a false smile painted on an abuser still desperate for applause.</p>
-    <p class="cast__status"><a class="cast__status--attached" href="https://www.lifo.gr/tags/giannis-klinis" target="_blank" rel="noopener">Giannis Klinis Attached</a></p>
+    <button class="cast__photo" type="button" aria-expanded="false" aria-controls="bio-elvis" aria-label="Greek Elvis">
+      <img class="cast__portrait" src="Last Sunny Day_files/Greek Elvis/Greek Elvis Thumnail.png" alt="">
+    </button>
+    <div class="cast__meta">
+      <h2 class="cast__role">
+        <button class="cast__name" type="button" aria-expanded="false" aria-controls="bio-elvis">
+          Greek Elvis <span class="cast__plus" aria-hidden="true">+</span>
+        </button>
+      </h2>
+      <a class="cast__attached" href="https://www.lifo.gr/tags/giannis-klinis" target="_blank" rel="noopener">Giannis Klinis Attached</a>
+    </div>
+    <div class="cast__bio" id="bio-elvis">
+      <p>Male, 40s&ndash;50s, Greek. A grotesque relic of showbiz and sleaze. Greek Elvis is trapped in a fantasy version of himself, a tragic parody of faded fame. Rhinestones, sweat, and menace define his surface. Beneath it, he is both predator and coward&mdash;hiding cruelty behind flamboyant theatrics.<br>To outsiders, he is a joke. To those under his control, he is a nightmare. His glittering stage persona masks a violent core. He is entertainment turned rotten, a false smile painted on an abuser still desperate for applause.</p>
+    </div>
   </article>
 </section>
 
@@ -895,24 +1184,94 @@ img { display: block; max-width: 100%; height: auto; }
 })();
 </script>
 
-<section class="soundtrack">
+<section class="soundtrack" id="soundtrack">
   <h2 class="soundtrack__heading">Soundtrack</h2>
-
-  <!-- Each track links out. Replace href="#" with the track URL. -->
+  <audio id="soundtrack-audio" preload="none"></audio>
   <ul class="soundtrack__list">
-    <li><a href="https://www.youtube.com/watch?v=0cfveJ9g0BI&amp;list=RD0cfveJ9g0BI&amp;start_radio=1" target="_blank" rel="noopener">Cuando Vuelva a Tu Lado</a></li>
-    <li><a href="https://www.youtube.com/watch?v=7b-q-EQrm2M" target="_blank" rel="noopener">Il Mio Mondo</a></li>
-    <li><a href="https://www.youtube.com/watch?v=Zx4CKpf_MrU&amp;list=RDZx4CKpf_MrU&amp;start_radio=1" target="_blank" rel="noopener">Le Vent Le Cri</a></li>
-    <li><a href="https://www.youtube.com/watch?v=ZIcdbDEF7-4&amp;list=RDZIcdbDEF7-4&amp;start_radio=1" target="_blank" rel="noopener">Tha Me Thimithis</a></li>
-    <li><a href="https://www.youtube.com/watch?v=2i4bbOeJyw8&amp;list=OLAK5uy_lfDTCjUa3ULqxHoQmx_WXuUL0uN-yL5eU&amp;index=83" target="_blank" rel="noopener">Diamonds and Blues (Eleni Karaoindrou)</a></li>
-    <li><a>Parisienne Walkways</a></li>
-    <li><a href="https://www.youtube.com/watch?v=pdgSC2B_9t4&amp;list=RDpdgSC2B_9t4&amp;start_radio=1" target="_blank" rel="noopener">La Mer / Romance Andalusa</a></li>
-    <li><a href="https://www.youtube.com/watch?v=LykJqvIMPNw&amp;list=RDLykJqvIMPNw&amp;start_radio=1" target="_blank" rel="noopener">Las Simples Cosas</a></li>
-    <li><a href="https://www.youtube.com/watch?v=G1NrgQP_tr8&amp;list=RDG1NrgQP_tr8&amp;start_radio=1" target="_blank" rel="noopener">Effigies Kai Pires</a></li>
-    <li><a href="https://www.youtube.com/watch?v=WWWCyV0VIqo" target="_blank" rel="noopener">Ase Me Na Figo</a></li>
-    <li><a href="https://www.youtube.com/watch?v=6n6-aoiTsyU&amp;list=RD6n6-aoiTsyU&amp;start_radio=1" target="_blank" rel="noopener">Oneiro Hameno</a></li>
-    <li><a href="https://www.youtube.com/watch?v=rt7PPidlIvg&amp;list=RDrt7PPidlIvg&amp;start_radio=1" target="_blank" rel="noopener">Funnel of Love</a></li>
-    <li><a href="https://www.youtube.com/watch?v=V5enDtP4WfE&amp;list=RDV5enDtP4WfE&amp;start_radio=1" target="_blank" rel="noopener">Now You&rsquo;re All Alone</a></li>
+    <li>
+      <button class="soundtrack__btn" type="button" data-src="Last%20Sunny%20Day_files/Music/cuando-vuelva-a-tu-lado.mp3" aria-label="Play Cuando Vuelva a Tu Lado">
+        <span class="soundtrack__icon" aria-hidden="true"></span>
+        <span class="soundtrack__name">Cuando Vuelva a Tu Lado</span>
+      </button>
+    </li>
+    <li>
+      <button class="soundtrack__btn" type="button" data-src="Last%20Sunny%20Day_files/Music/il-mio-mondo.mp3" aria-label="Play Il Mio Mondo">
+        <span class="soundtrack__icon" aria-hidden="true"></span>
+        <span class="soundtrack__name">Il Mio Mondo</span>
+      </button>
+    </li>
+    <li>
+      <button class="soundtrack__btn" type="button" data-src="Last%20Sunny%20Day_files/Music/le-vent-le-cri.mp3" aria-label="Play Le Vent Le Cri">
+        <span class="soundtrack__icon" aria-hidden="true"></span>
+        <span class="soundtrack__name">Le Vent Le Cri</span>
+      </button>
+    </li>
+    <li>
+      <button class="soundtrack__btn" type="button" data-src="Last%20Sunny%20Day_files/Music/tha-me-thimithis.mp3" aria-label="Play Tha Me Thimithis">
+        <span class="soundtrack__icon" aria-hidden="true"></span>
+        <span class="soundtrack__name">Tha Me Thimithis</span>
+      </button>
+    </li>
+    <li>
+      <button class="soundtrack__btn" type="button" data-src="Last%20Sunny%20Day_files/Music/nocturnal-diamonds-and-blues.mp3" aria-label="Play Diamonds and Blues">
+        <span class="soundtrack__icon" aria-hidden="true"></span>
+        <span class="soundtrack__name">Diamonds and Blues</span>
+      </button>
+    </li>
+    <li>
+      <button class="soundtrack__btn" type="button" data-src="Last%20Sunny%20Day_files/Music/la-mer-romance-andaluza.mp3" aria-label="Play La Mer / Romance Andalusa">
+        <span class="soundtrack__icon" aria-hidden="true"></span>
+        <span class="soundtrack__name">La Mer / Romance Andalusa</span>
+      </button>
+    </li>
+    <li>
+      <button class="soundtrack__btn" type="button" data-src="Last%20Sunny%20Day_files/Music/las-simples-cosas.mp3" aria-label="Play Las Simples Cosas">
+        <span class="soundtrack__icon" aria-hidden="true"></span>
+        <span class="soundtrack__name">Las Simples Cosas</span>
+      </button>
+    </li>
+    <li>
+      <button class="soundtrack__btn" type="button" data-src="Last%20Sunny%20Day_files/Music/efyges-kai-pires.mp3" aria-label="Play Effigies Kai Pires">
+        <span class="soundtrack__icon" aria-hidden="true"></span>
+        <span class="soundtrack__name">Effigies Kai Pires</span>
+      </button>
+    </li>
+    <li>
+      <button class="soundtrack__btn" type="button" data-src="Last%20Sunny%20Day_files/Music/ase-me-na-figo.mp3" aria-label="Play Ase Me Na Figo">
+        <span class="soundtrack__icon" aria-hidden="true"></span>
+        <span class="soundtrack__name">Ase Me Na Figo</span>
+      </button>
+    </li>
+    <li>
+      <button class="soundtrack__btn" type="button" data-src="Last%20Sunny%20Day_files/Music/oneiro-hameno.mp3" aria-label="Play Oneiro Hameno">
+        <span class="soundtrack__icon" aria-hidden="true"></span>
+        <span class="soundtrack__name">Oneiro Hameno</span>
+      </button>
+    </li>
+    <li>
+      <button class="soundtrack__btn" type="button" data-src="Last%20Sunny%20Day_files/Music/funnel-of-love.mp3" aria-label="Play Funnel of Love">
+        <span class="soundtrack__icon" aria-hidden="true"></span>
+        <span class="soundtrack__name">Funnel of Love</span>
+      </button>
+    </li>
+    <li>
+      <button class="soundtrack__btn" type="button" data-src="Last%20Sunny%20Day_files/Music/now-youre-all-alone.mp3" aria-label="Play Now You’re All Alone">
+        <span class="soundtrack__icon" aria-hidden="true"></span>
+        <span class="soundtrack__name">Now You’re All Alone</span>
+      </button>
+    </li>
+    <li>
+      <button class="soundtrack__btn" type="button" data-src="Last%20Sunny%20Day_files/Music/ive-seen-that-face-before.mp3" aria-label="Play I’ve Seen That Face Before">
+        <span class="soundtrack__icon" aria-hidden="true"></span>
+        <span class="soundtrack__name">I’ve Seen That Face Before</span>
+      </button>
+    </li>
+    <li>
+      <button class="soundtrack__btn" type="button" data-src="Last%20Sunny%20Day_files/Music/sweet-dreams.mp3" aria-label="Play Sweet Dreams">
+        <span class="soundtrack__icon" aria-hidden="true"></span>
+        <span class="soundtrack__name">Sweet Dreams</span>
+      </button>
+    </li>
   </ul>
 </section>
 
@@ -1140,7 +1499,7 @@ img { display: block; max-width: 100%; height: auto; }
 
   <nav class="gallery__nav">
     <div class="gallery__nav-left">
-      <a class="gallery__top" href="#top">Back to top</a>
+      <a class="gallery__top" href="#gallery">Back to top</a>
       <button type="button" data-view="gallery" aria-pressed="true">Gallery</button>
     </div>
     <div class="gallery__nav-mid">
@@ -1150,6 +1509,36 @@ img { display: block; max-width: 100%; height: auto; }
       <button type="button" data-view="grid" aria-pressed="false">Grid</button>
     </div>
   </nav>
+</section>
+
+<section class="refs">
+  <h2 class="refs__heading">References</h2>
+  <ul class="refs__list">
+    <li>The Killer</li>
+    <li>The Godfather</li>
+    <li>Eternity and a Day</li>
+    <li>L’avventura</li>
+    <li>La Dolce Vita</li>
+    <li>8½</li>
+    <li>Once Upon a Time in America</li>
+    <li>Pulp Fiction</li>
+    <li>Harakiri</li>
+    <li>Lady Snowblood</li>
+    <li>Amores Perros</li>
+    <li>A Bittersweet Life</li>
+    <li>Infernal Affairs</li>
+    <li>Oldboy</li>
+    <li>La Femme Nikita</li>
+    <li>Three Colors: Red</li>
+    <li>Three Colors: Blue</li>
+    <li>Seven Samurai</li>
+    <li>The Departed</li>
+    <li>Goodfellas</li>
+    <li>Taxi Driver</li>
+    <li>Reservoir Dogs</li>
+    <li>Le Samouraï</li>
+    <li>Le Cercle Rouge</li>
+  </ul>
 </section>
 
 <script>
@@ -1172,6 +1561,15 @@ img { display: block; max-width: 100%; height: auto; }
   // Small screens open on Full size - the multi-column views are
   // unreadable at phone width. The switcher still works from there.
   if (window.matchMedia('(max-width: 767px)').matches) setView('full');
+
+  var topLink = gallery.querySelector('.gallery__top');
+  if (topLink) {
+    topLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      gallery.scrollIntoView();
+      if (history.replaceState) history.replaceState(null, '', '#gallery');
+    });
+  }
 })();
 </script>
 
@@ -1186,7 +1584,7 @@ img { display: block; max-width: 100%; height: auto; }
 
   /* ---- Split body copy into lines ---- */
   var bodyCopy = document.querySelectorAll(
-    '.header__logline, .prose p, .cast__member p'
+    '.header__logline, .prose p'
   );
 
   function splitLines(el) {
@@ -1261,7 +1659,7 @@ img { display: block; max-width: 100%; height: auto; }
 
   /* ---- Headings fade in ---- */
   var headings = document.querySelectorAll(
-    '.prose__heading, .cast__role, .soundtrack__heading, .cast__status, .cast__portrait'
+    '.prose__heading, .soundtrack__heading, .refs__heading, .cast__portrait'
   );
   Array.prototype.forEach.call(headings, function (h) { h.classList.add('reveal'); });
 
@@ -1342,6 +1740,32 @@ img { display: block; max-width: 100%; height: auto; }
 
 <script>
 (function () {
+  var members = document.querySelectorAll('.cast__member');
+
+  function setOpen(member, open) {
+    member.classList.toggle('is-open', open);
+    var plus = member.querySelector('.cast__plus');
+    if (plus) plus.textContent = open ? '\u2212' : '+';
+    Array.prototype.forEach.call(member.querySelectorAll('[aria-expanded]'), function (btn) {
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  }
+
+  Array.prototype.forEach.call(members, function (member) {
+    Array.prototype.forEach.call(member.querySelectorAll('.cast__photo, .cast__name'), function (btn) {
+      btn.addEventListener('click', function () {
+        var willOpen = !member.classList.contains('is-open');
+        Array.prototype.forEach.call(members, function (other) {
+          setOpen(other, other === member && willOpen);
+        });
+      });
+    });
+  });
+})();
+</script>
+
+<script>
+(function () {
   var clips = document.querySelectorAll('.reel__item video');
   if (!('IntersectionObserver' in window)) {
     Array.prototype.forEach.call(clips, function (v) { v.play().catch(function () {}); });
@@ -1366,27 +1790,58 @@ img { display: block; max-width: 100%; height: auto; }
   var audio = document.getElementById('score-audio');
 
   var dir = 'Last%20Sunny%20Day_files/Music/';
-  var playlist = [
-    'Nocturnal%20%28From%20Diamonds%20and%20Blues%29.mp3',
-    'Farewell%20%28feat.%20Tzeni%20Karezi%29%20%28From%20Diamonds%20and%20Blues%29.mp3',
-    'Diamonds%20and%20Blues%20%28From%20Diamonds%20and%20Blues%29.mp3'
+  var opener = 'Nocturnal%20%28From%20Diamonds%20and%20Blues%29.mp3';
+  var rest = [
+    'cuando-vuelva-a-tu-lado.mp3',
+    'il-mio-mondo.mp3',
+    'le-vent-le-cri.mp3',
+    'tha-me-thimithis.mp3',
+    'la-mer-romance-andaluza.mp3',
+    'las-simples-cosas.mp3',
+    'efyges-kai-pires.mp3',
+    'ase-me-na-figo.mp3',
+    'oneiro-hameno.mp3',
+    'funnel-of-love.mp3',
+    'now-youre-all-alone.mp3',
+    'ive-seen-that-face-before.mp3',
+    'sweet-dreams.mp3'
   ];
+  var playlist = [];
   var track = 0;
 
+  function shuffle(items) {
+    var a = items.slice();
+    var i, j, t;
+    for (i = a.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function buildQueue() {
+    playlist = [opener].concat(shuffle(rest));
+    track = 0;
+  }
+
   function load(i) {
-    track = (i + playlist.length) % playlist.length;
+    track = i;
     audio.src = dir + playlist[track];
   }
 
-  // Roll on to the next track, wrapping back to the first.
   audio.addEventListener('ended', function () {
-    load(track + 1);
+    if (track + 1 >= playlist.length) buildQueue();
+    else track += 1;
+    load(track);
     audio.play().catch(function () {});
   });
 
   btn.addEventListener('click', function () {
     if (audio.paused) {
-      if (!audio.src) load(0);
+      if (!playlist.length) {
+        buildQueue();
+        load(0);
+      }
       audio.play().catch(function () {});
     } else {
       audio.pause();
@@ -1402,6 +1857,97 @@ img { display: block; max-width: 100%; height: auto; }
     wrap.classList.remove('is-playing');
     btn.setAttribute('aria-label', 'Play soundtrack');
   });
+})();
+</script>
+
+<script>
+(function () {
+  var list = document.querySelector('.soundtrack__list');
+  var audio = document.getElementById('soundtrack-audio');
+  var scoreAudio = document.getElementById('score-audio');
+  if (!list || !audio) return;
+
+  var current = null;
+
+  function label(btn, playing) {
+    var name = btn.querySelector('.soundtrack__name').textContent;
+    btn.classList.toggle('is-playing', playing);
+    btn.setAttribute('aria-label', (playing ? 'Pause ' : 'Play ') + name);
+  }
+
+  list.addEventListener('click', function (e) {
+    var btn = e.target.closest('.soundtrack__btn');
+    if (!btn) return;
+    var src = btn.getAttribute('data-src');
+    if (current === btn && !audio.paused) {
+      audio.pause();
+      return;
+    }
+    if (scoreAudio && !scoreAudio.paused) scoreAudio.pause();
+    if (current && current !== btn) label(current, false);
+    current = btn;
+    if (audio.getAttribute('src') !== src) audio.src = src;
+    audio.play().catch(function () {});
+  });
+
+  audio.addEventListener('play', function () {
+    if (current) label(current, true);
+    if (scoreAudio && !scoreAudio.paused) scoreAudio.pause();
+  });
+
+  audio.addEventListener('pause', function () {
+    if (current) label(current, false);
+  });
+
+  audio.addEventListener('ended', function () {
+    if (current) label(current, false);
+  });
+
+  if (scoreAudio) {
+    scoreAudio.addEventListener('play', function () {
+      if (!audio.paused) audio.pause();
+    });
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var nav = document.querySelector('.nav');
+  var btn = nav && nav.querySelector('.nav__btn');
+  var list = document.querySelector('.nav__list');
+  if (!nav || !btn || !list) return;
+
+  var hideTimer;
+
+  function open() {
+    clearTimeout(hideTimer);
+    list.classList.add('is-open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+
+  function close() {
+    list.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  function closeSoon() {
+    hideTimer = setTimeout(close, 80);
+  }
+
+  nav.addEventListener('mouseenter', open);
+  nav.addEventListener('mouseleave', closeSoon);
+  list.addEventListener('mouseenter', open);
+  list.addEventListener('mouseleave', closeSoon);
+
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (list.classList.contains('is-open')) close();
+    else open();
+  });
+
+  document.addEventListener('click', function () { close(); });
+  list.addEventListener('click', function (e) { e.stopPropagation(); });
 })();
 </script>
 
