@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inspiration — Last Sunny Day</title>
+<link rel="stylesheet" href="../lsd.css?v=7">
+
+</head>
+<body>
+<nav class="dupe__nav">
+  <ul>
+    <li><a href="/">last sunny day</a></li>
+    <li><a href="/logline">logline</a></li>
+    <li><a href="/makeitpersonal">make it personal</a></li>
+    <li><a href="/inspiration" class="is-current">inspiration</a></li>
+    <li><a href="/actors">cast</a></li>
+    <li><a href="/greekelvis">greek elvis</a></li>
+    <li><a href="/soundtrack">soundtrack</a></li>
+    <li><a href="/gallery">gallery</a></li>
+    <li><a href="/references">references</a></li>
+    <li><a class="dupe__live" href="/info">live updates</a></li>
+  </ul>
+</nav>
+<div class="score" id="score">
+  <button class="score__btn" type="button" aria-label="Play soundtrack">
+    <span class="score__icon"></span>
+    <span>Soundtrack</span>
+  </button>
+  <audio id="score-audio" preload="none"></audio>
+</div>
+<main class="dupe__page">
+<section class="prose" id="inspiration">
+  <h2 class="prose__heading">Inspiration</h2>
+  <p>What draws me to this film is the stories of childhood friendship and nostalgia, like those in Spielberg&rsquo;s work. I&rsquo;m equally inspired by the romance and rebellion of Jean-Luc Godard, the poetic sadness of Kieslowski and Theo Angelopoulos, and the explosive violence of John Woo and Park Chan-wook. I also admire the sharp wit and blood-soaked tension of Japanese cinema, like the films of Toshiya Fujita and Masaki Kobayashi.</p>
+  <p>These are the types of characters I want to bring to the screen: flawed, brutal, unaware of how broken they truly are. I want to see them confront that truth. To test their bonds. To ask what happens when violence is no longer the answer, and friendship is all that remains.</p>
+  <p>A big thematic part of this film is the fear of death, which I've been struggling with for some time. In reality, it's not the fear of the action or way of dying, but of the unknown. How does it feel? Where do we go? What's the matter with it all?</p>
+</section>
+
+<section class="reel">
+  <figure class="reel__item">
+    <video muted playsinline loop preload="none">
+      <source src="https://player.vimeo.com/progressive_redirect/playback/1180843766/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&amp;log_user=0&amp;signature=98e97783c19442af5bc86343b156d0aabda85bf13c99023fb76f789865eb054d" type="video/mp4">
+    </video>
+    <figcaption class="reel__caption">SLOW MOTION</figcaption>
+  </figure>
+  <figure class="reel__item">
+    <video muted playsinline loop preload="none">
+      <source src="https://player.vimeo.com/progressive_redirect/playback/1180843595/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&amp;log_user=0&amp;signature=5205643bcdaad1355ee71bdfb3ff034ea8b92b0de5aaf030db63eb897f9abc5d" type="video/mp4">
+    </video>
+    <figcaption class="reel__caption">REAL SQUIBS AND BLOOD</figcaption>
+  </figure>
+  <figure class="reel__item">
+    <video muted playsinline loop preload="none">
+      <source src="https://player.vimeo.com/progressive_redirect/playback/1180843664/rendition/720p/file.mp4%20%28720p%29.mp4?loc=external&amp;log_user=0&amp;signature=a62a25e555d34e8a2239300e5f255d28e15ca850097341f545cfd03bb1394946" type="video/mp4">
+    </video>
+    <figcaption class="reel__caption">HONG KONG ACTION</figcaption>
+  </figure>
+  <figure class="reel__item">
+    <video muted playsinline loop preload="none">
+      <source src="https://player.vimeo.com/progressive_redirect/playback/1180855995/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&amp;log_user=0&amp;signature=4d40d40b98db98eb913d2fbdad65a03becc9823b1489091014c5b94b6e2a3987" type="video/mp4">
+    </video>
+    <figcaption class="reel__caption">CAMERA MOVEMENT</figcaption>
+  </figure>
+  <figure class="reel__item">
+    <video muted playsinline loop preload="none">
+      <source src="https://player.vimeo.com/progressive_redirect/playback/1180843501/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&amp;log_user=0&amp;signature=390af6c160c20c875eb70ff5da4b6a7c2dc8578d02dc5f8c25a4fc81952235cc" type="video/mp4">
+    </video>
+    <figcaption class="reel__caption">ZOOM</figcaption>
+  </figure>
+</section>
+
+
+</main>
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Split body copy into lines ---- */
+  var bodyCopy = document.querySelectorAll(
+    '.header__logline, .prose p'
+  );
+
+  function splitLines(el) {
+    if (el.dataset.html === undefined) el.dataset.html = el.innerHTML;
+    el.innerHTML = el.dataset.html;
+
+    // Wrap every word so we can measure where the browser broke each line.
+    var nodes = Array.prototype.slice.call(el.childNodes);
+    var flat = document.createDocumentFragment();
+
+    nodes.forEach(function (node) {
+      if (node.nodeType === 3) {
+        node.textContent.split(/(\s+)/).forEach(function (chunk) {
+          if (!chunk) return;
+          if (/^\s+$/.test(chunk)) {
+            flat.appendChild(document.createTextNode(' '));
+          } else {
+            var w = document.createElement('span');
+            w.className = 'w';
+            w.textContent = chunk;
+            flat.appendChild(w);
+          }
+        });
+      } else {
+        flat.appendChild(node.cloneNode(true));
+      }
+    });
+
+    el.innerHTML = '';
+    el.appendChild(flat);
+
+    // Group words by their vertical offset, then wrap each group as a line.
+    var kids = Array.prototype.slice.call(el.childNodes);
+    var lines = [];
+    var current = [];
+    var lastTop = null;
+
+    kids.forEach(function (node) {
+      if (node.nodeType === 1 && node.tagName === 'BR') {
+        lines.push(current); current = []; lastTop = null;
+        return;
+      }
+      if (node.nodeType === 1 && node.classList.contains('w')) {
+        var top = node.offsetTop;
+        if (lastTop !== null && top > lastTop) {
+          lines.push(current); current = [];
+        }
+        lastTop = top;
+      }
+      current.push(node);
+    });
+    if (current.length) lines.push(current);
+
+    el.innerHTML = '';
+    lines.forEach(function (group) {
+      if (!group.length) return;
+      var line  = document.createElement('span');
+      var inner = document.createElement('span');
+      line.className = 'ln';
+      inner.className = 'ln__i';
+      group.forEach(function (n) { inner.appendChild(n); });
+      line.appendChild(inner);
+      el.appendChild(line);
+    });
+
+    Array.prototype.forEach.call(el.querySelectorAll('.ln__i'), function (i, idx) {
+      i.style.transitionDelay = (idx * 0.06) + 's';
+    });
+  }
+
+  if (!reduced) Array.prototype.forEach.call(bodyCopy, splitLines);
+
+  /* ---- Headings fade in ---- */
+  var headings = document.querySelectorAll(
+    '.prose__heading, .soundtrack__heading, .refs__heading, .cast__portrait'
+  );
+  Array.prototype.forEach.call(headings, function (h) { h.classList.add('reveal'); });
+
+  /* ---- Observe everything ---- */
+  var targets = []
+    .concat(Array.prototype.slice.call(headings))
+    .concat(Array.prototype.slice.call(bodyCopy))
+    .concat(Array.prototype.slice.call(document.querySelectorAll('.gallery__grid img')));
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-inview');
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+
+    targets.forEach(function (t) { io.observe(t); });
+  } else {
+    targets.forEach(function (t) { t.classList.add('is-inview'); });
+  }
+
+  /* ---- Re-split lines on resize ---- */
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    if (reduced) return;
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      Array.prototype.forEach.call(bodyCopy, function (el) {
+        var seen = el.classList.contains('is-inview');
+        splitLines(el);
+        if (seen) el.classList.add('is-inview');
+      });
+    }, 200);
+  });
+
+  /* ---- Lightbox ---- */
+  var box   = document.getElementById('lightbox');
+  if (!box) return;
+  var boxImg = box.querySelector('img');
+  var close = box.querySelector('.lightbox__close');
+  var lastFocus = null;
+
+  function open(src, alt) {
+    lastFocus = document.activeElement;
+    boxImg.src = src;
+    boxImg.alt = alt || '';
+    box.hidden = false;
+    requestAnimationFrame(function () { box.classList.add('is-open'); });
+    document.body.style.overflow = 'hidden';
+    close.focus();
+  }
+
+  function shut() {
+    box.classList.remove('is-open');
+    document.body.style.overflow = '';
+    setTimeout(function () {
+      box.hidden = true;
+      boxImg.removeAttribute('src');
+    }, 350);
+    if (lastFocus) lastFocus.focus();
+  }
+
+  document.querySelector('.gallery__grid').addEventListener('click', function (e) {
+    var img = e.target.closest('img');
+    if (!img) return;
+    if (document.getElementById('gallery').classList.contains('gallery--full')) return;
+    open(img.currentSrc || img.src, img.alt);
+  });
+
+  close.addEventListener('click', shut);
+  box.addEventListener('click', function (e) { if (e.target === box) shut(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && box.classList.contains('is-open')) shut();
+  });
+})();
+</script>
+<script>
+(function () {
+  var clips = document.querySelectorAll('.reel__item video');
+  if (!('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(clips, function (v) { v.play().catch(function () {}); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var v = e.target;
+      if (e.isIntersecting) { v.play().catch(function () {}); }
+      else if (!v.paused) { v.pause(); }
+    });
+  }, { rootMargin: '200% 0px' });
+  Array.prototype.forEach.call(clips, function (v) { io.observe(v); });
+})();
+</script>
+<script src="../lsd.js"></script>
+</body>
+</html>

@@ -348,12 +348,8 @@ body {
 
 .footer-space { height: 12vw; }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity .9s cubic-bezier(.22,1,.36,1),
-              transform .9s cubic-bezier(.22,1,.36,1);
-}
+/* Text appears without animation */
+.reveal { opacity: 1; transform: none; transition: none; }
 
 .reveal.is-inview { opacity: 1; transform: none; }
 

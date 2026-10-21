@@ -1,0 +1,1064 @@
+
+@font-face {
+  font-family: "Daito Heading";
+  src: url("Last%20Sunny%20Day_files/Font/daito/Daito-NormalRegular.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Daito Body";
+  src: url("Last%20Sunny%20Day_files/Font/daito/Daito-NormalThin.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+:root { --yellow: #ff0; }
+body { overflow-x: hidden; }
+figure, figcaption { margin: 0; }
+body {
+  background: #fff;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; height: auto; }
+
+/* ---------- Header ---------- */
+.header {
+  padding: 7.25vw 0 0;
+  text-align: center;
+}
+
+.header__logline {
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1.2vw;
+  line-height: 1.28;
+  text-align: left;
+  max-width: 62vw;
+  margin: 0 0 0 18.5vw;
+  letter-spacing: 0;
+}
+
+.header__still {
+  position: relative;
+  isolation: isolate;
+  margin: 8vw auto 0;
+  width: 100%;
+  max-width: 1560px;
+}
+
+.header__still video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.header__still::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 48%;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.82) 0%,
+    rgba(0,0,0,.5) 38%,
+    rgba(0,0,0,.18) 70%,
+    rgba(0,0,0,0) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.header__title {
+  position: absolute;
+  left: 50%;
+  bottom: 4vw;
+  transform: translateX(-50%);
+  width: 72%;
+  margin: 0;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+  z-index: 2;
+}
+
+.header__title img,
+.header__lockup img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  filter: invert(1);
+}
+
+.header__lockup {
+  position: absolute;
+  left: 50%;
+  top: 3.2vw;
+  transform: translateX(-50%);
+  width: 72%;
+  margin: 0;
+  text-align: center;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+  z-index: 2;
+}
+
+.header__credit img { width: 30%; }
+
+.header__subtitle { margin-top: 1.6vw; }
+.header__subtitle img { width: 42%; }
+
+
+/* ---------- Editorial text sections ---------- */
+.prose {
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  margin: 0 auto;
+  padding: 9vw 0 0;
+  width: 63vw;
+  margin-left: 18.5vw;
+}
+
+.prose__heading {
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1.55vw;
+  line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin: 0 0 2.6vw;
+}
+
+.prose p {
+  font-weight: 400;
+  font-size: 1.2vw;
+  line-height: 1.52;
+  margin: 0 0 1.9vw;
+  max-width: 46vw;
+}
+
+.prose p:last-child { margin-bottom: 0; }
+
+.prose + .prose { padding-top: 7vw; }
+
+
+/* ---------- Reference video reel ---------- */
+.reel { margin-top: 9vw; }
+
+.reel__item {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+
+.reel__item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.reel__caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 2.05vw;
+  line-height: 1;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0 6vw;
+}
+
+
+/* ---------- Cast ---------- */
+.cast {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.2vw 2vw;
+  width: 63vw;
+  margin-left: 18.5vw;
+  padding: 9vw 0 0;
+}
+
+.cast__member { margin: 0; padding: 0; }
+
+.cast__photo {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.cast__portrait {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin: 0;
+}
+
+.cast__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .35em .85em;
+  margin-top: 1.15vw;
+}
+
+.cast__role {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 400;
+}
+
+.cast__name {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .4em;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1.15vw;
+  line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.cast__plus {
+  font-size: 1.05em;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.cast__attached {
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  font-size: 1.05vw;
+  line-height: 1.3;
+  color: #000;
+  text-decoration: none;
+  background: var(--yellow);
+  padding: 0 .18em;
+  transition: opacity .2s ease;
+}
+
+.cast__attached:hover { opacity: .65; }
+
+.cast__bio {
+  display: none;
+  margin-top: 1vw;
+}
+
+.cast__bio p {
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1.05vw;
+  line-height: 1.45;
+  margin: 0 0 1em;
+}
+
+.cast__bio p:last-child { margin-bottom: 0; }
+
+.cast__member.is-open .cast__bio { display: block; }
+
+
+/* ---------- Greek Elvis ---------- */
+.elvis { margin-top: 9vw; }
+
+.elvis__stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+}
+
+.elvis__stage iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  transform: translate(-50%, -50%) scale(1.3);
+  transform-origin: center center;
+}
+
+/* Centred "watch" overlay */
+.elvis__watch {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 2.05vw;
+  line-height: 1;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: opacity .35s ease;
+}
+
+.elvis.is-playing .elvis__watch { opacity: 0; pointer-events: none; }
+
+/* Custom control bar */
+.elvis__controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.6vw;
+  padding: 1.6vw 2.4vw;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.elvis.is-playing .elvis__controls,
+.elvis__stage:hover .elvis__controls { opacity: 1; }
+
+.elvis__toggle {
+  flex: none;
+  position: relative;
+  width: 1.15vw;
+  height: 1.35vw;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Play triangle */
+.elvis__toggle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+/* Pause bars */
+.elvis__toggle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(#fff, #fff) left / 32% 100% no-repeat,
+    linear-gradient(#fff, #fff) right / 32% 100% no-repeat;
+  opacity: 0;
+}
+
+.elvis.is-playing .elvis__toggle::before { opacity: 0; }
+.elvis.is-playing .elvis__toggle::after  { opacity: 1; }
+
+.elvis__track {
+  flex: 1;
+  position: relative;
+  height: 1.2vw;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.elvis__track::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,.45);
+}
+
+.elvis__progress {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 1px;
+  background: #fff;
+  width: 0;
+  pointer-events: none;
+}
+
+
+/* ---------- Soundtrack ---------- */
+.soundtrack {
+  width: 63vw;
+  margin-left: 18.5vw;
+  padding: 9vw 0 0;
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+}
+
+.soundtrack__heading {
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1.55vw;
+  line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin: 0 0 3.2vw;
+}
+
+.soundtrack__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.4vw 1.6vw;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.soundtrack__btn {
+  display: flex;
+  align-items: center;
+  gap: .55em;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  font-size: 1.05vw;
+  line-height: 1.3;
+  color: #000;
+}
+
+.soundtrack__icon {
+  position: relative;
+  width: .62em;
+  height: .74em;
+  flex: none;
+  color: #000;
+  transition: color .2s ease;
+}
+
+.soundtrack__btn:hover .soundtrack__icon {
+  color: var(--yellow);
+}
+
+.soundtrack__icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.soundtrack__icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(currentColor, currentColor) left / 32% 100% no-repeat,
+    linear-gradient(currentColor, currentColor) right / 32% 100% no-repeat;
+  opacity: 0;
+}
+
+.soundtrack__btn.is-playing .soundtrack__icon::before { opacity: 0; }
+.soundtrack__btn.is-playing .soundtrack__icon::after  { opacity: 1; }
+
+.soundtrack__name {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+
+/* ---------- Movie references ---------- */
+.refs {
+  width: 63vw;
+  margin-left: 18.5vw;
+  padding: 9vw 0 12vw;
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+}
+
+.refs__heading {
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1.55vw;
+  line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin: 0 0 3.2vw;
+}
+
+.refs__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.4vw 1.6vw;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.refs__list li {
+  font-size: 1.05vw;
+  line-height: 1.3;
+}
+
+
+/* ---------- Reference gallery ---------- */
+.gallery {
+  background: #fff;
+  padding: 9vw 0 0;
+}
+
+.gallery__grid {
+  column-count: 6;
+  column-gap: 10px;
+  padding: 0 10px;
+}
+
+.gallery--full .gallery__grid { column-count: 1; column-gap: 0; padding: 0; }
+.gallery--grid .gallery__grid { column-count: 3; }
+
+.gallery__grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 10px;
+}
+
+.gallery--full .gallery__grid img { margin-bottom: 0; }
+
+/* Sticky state switcher */
+.gallery__nav {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: end;
+  background: #fff;
+  padding: 1.1vw 0;
+  margin: 0;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-size: .78vw;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.gallery__nav button,
+.gallery__nav a {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+  transition: opacity .2s ease;
+}
+
+.gallery__nav button { opacity: .5; }
+.gallery__nav button:hover,
+.gallery__nav a:hover { opacity: .65; }
+.gallery__nav [aria-pressed="true"] { opacity: 1; }
+
+.gallery__nav-left  { justify-self: start;  text-align: left; }
+.gallery__nav-mid   { justify-self: center; text-align: center; }
+.gallery__nav-right { justify-self: end;    text-align: right; }
+
+.gallery__top { margin-bottom: .55vw; }
+
+
+/* ---------- Scroll reveals ---------- */
+/* Text appears without animation */
+.reveal { opacity: 1; transform: none; transition: none; }
+
+.reveal.is-inview { opacity: 1; transform: none; }
+
+/* Line-by-line body copy */
+.ln { display: block; overflow: hidden; }
+
+.ln__i { display: block; transform: none; opacity: 1; transition: none; }
+
+.is-inview .ln__i { transform: none; opacity: 1; }
+
+/* Gallery image reveal + hover */
+.gallery__grid img {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .8s cubic-bezier(.22,1,.36,1),
+              transform .8s cubic-bezier(.22,1,.36,1);
+  cursor: pointer;
+}
+
+.gallery__grid img.is-inview { opacity: 1; transform: none; }
+
+.gallery--gallery .gallery__grid img.is-inview:hover,
+.gallery--grid    .gallery__grid img.is-inview:hover { opacity: .8; }
+
+.gallery--full .gallery__grid img { cursor: default; }
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.92);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .35s ease, visibility .35s;
+}
+
+.lightbox.is-open { opacity: 1; visibility: visible; }
+
+.lightbox[hidden] { display: none; }
+
+.lightbox img {
+  max-width: 92vw;
+  max-height: 88vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transform: scale(.97);
+  transition: transform .35s cubic-bezier(.22,1,.36,1);
+}
+
+.lightbox.is-open img { transform: none; }
+
+.lightbox__close {
+  position: absolute;
+  top: 2vw;
+  right: 2.4vw;
+  width: 2.2vw;
+  height: 2.2vw;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.lightbox__close::before,
+.lightbox__close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #fff;
+  transition: background .2s ease;
+}
+
+.lightbox__close::before { transform: rotate(45deg); }
+.lightbox__close::after  { transform: rotate(-45deg); }
+.lightbox__close:hover::before,
+.lightbox__close:hover::after { background: #c1553c; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .ln__i, .gallery__grid img, .lightbox, .lightbox img {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .lightbox { visibility: hidden; }
+  .lightbox.is-open { visibility: visible; }
+}
+
+
+/* ---------- Soundtrack player ---------- */
+.score {
+  position: fixed;
+  top: 2vw;
+  right: 2.4vw;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  /* Inverts against whatever scrolls beneath it, light or dark. */
+  mix-blend-mode: difference;
+}
+
+.score__btn {
+  display: flex;
+  align-items: center;
+  gap: .7em;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-size: 1.1vw;
+  line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: opacity .2s ease;
+}
+
+.score__btn:hover { opacity: .6; }
+
+.score__icon {
+  position: relative;
+  width: .62em;
+  height: .74em;
+  flex: none;
+}
+
+.score__icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.score__icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(currentColor, currentColor) left / 32% 100% no-repeat,
+    linear-gradient(currentColor, currentColor) right / 32% 100% no-repeat;
+  opacity: 0;
+}
+
+.score.is-playing .score__icon::before { opacity: 0; }
+.score.is-playing .score__icon::after  { opacity: 1; }
+
+.live {
+  position: fixed;
+  top: 2vw;
+  left: 2.4vw;
+  z-index: 90;
+  mix-blend-mode: difference;
+  color: #fff;
+  text-decoration: none;
+}
+
+.live:link,
+.live:visited,
+.live:hover,
+.live:active {
+  color: #fff;
+  text-decoration: none;
+}
+
+.live__btn {
+  display: inline-block;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-size: 1.1vw;
+  line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid #00f;
+  padding-bottom: .12em;
+  transition: opacity .2s ease;
+}
+
+.live__btn:hover { opacity: .6; }
+
+.nav {
+  position: fixed;
+  top: 2vw;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  mix-blend-mode: difference;
+  text-align: center;
+}
+
+.nav__btn {
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-size: 1.1vw;
+  line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.nav__list {
+  position: fixed;
+  top: 3.5vw;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  display: none;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1.5vw;
+  list-style: none;
+  margin: 0;
+  padding: .4vw 0 0;
+  background: none;
+  text-align: center;
+  mix-blend-mode: difference;
+}
+
+.nav__list.is-open { display: flex; }
+
+.nav__list a {
+  display: block;
+  padding: 0;
+  font-family: "Daito Heading", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 1.05vw;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: .18em;
+  text-decoration-thickness: 1px;
+  transition: opacity .2s ease;
+  white-space: nowrap;
+}
+
+.nav__list a:hover { opacity: .6; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 767px) {
+  .header { padding-top: 14vw; }
+  .header__lockup { width: 86%; top: 5vw; }
+  .header__credit img { width: 54%; }
+  .header__subtitle { margin-top: 3vw; }
+  .header__subtitle img { width: 68%; }
+  .header__title { width: 86%; bottom: 6vw; }
+  .header__logline {
+    font-size: 3.8vw;
+    max-width: none;
+    margin: 0 8vw;
+  }
+  .header__still { margin-top: 18vw; }
+
+  .prose { width: auto; margin-left: 0; padding: 20vw 8vw 0; }
+  .prose + .prose { padding-top: 16vw; }
+  .prose__heading { font-size: 4.4vw; margin-bottom: 7vw; }
+  .prose p { font-size: 3.8vw; margin-bottom: 5.5vw; max-width: none; }
+
+  .reel { margin-top: 20vw; }
+  .reel__caption { font-size: 5.4vw; }
+
+  .cast {
+    grid-template-columns: 1fr;
+    gap: 10vw;
+    width: auto;
+    margin-left: 0;
+    padding: 20vw 8vw 0;
+  }
+  .cast__meta { margin-top: 4vw; }
+  .cast__name { font-size: 4.4vw; }
+  .cast__attached { font-size: 4vw; }
+  .cast__bio { margin-top: 4vw; }
+  .cast__bio p { font-size: 4.4vw; }
+
+  .elvis { margin-top: 20vw; }
+  .elvis__watch { font-size: 5.4vw; }
+  .elvis__controls { gap: 4vw; padding: 4vw 5vw; opacity: 1; }
+  .elvis__toggle { width: 3.4vw; height: 4vw; }
+  .elvis__track { height: 4vw; }
+
+  .soundtrack { width: auto; margin-left: 0; padding: 20vw 8vw 0; }
+  .soundtrack__heading { font-size: 4.4vw; margin-bottom: 9vw; }
+  .soundtrack__list { grid-template-columns: 1fr; gap: 5.5vw; }
+  .soundtrack__btn { font-size: 4.4vw; }
+
+  .refs { width: auto; margin-left: 0; padding: 20vw 8vw 16vw; }
+  .refs__heading { font-size: 4.4vw; margin-bottom: 9vw; }
+  .refs__list { grid-template-columns: 1fr; gap: 5.5vw; }
+  .refs__list li { font-size: 4.4vw; }
+
+  .score { top: 5vw; right: 5vw; }
+  .score__btn { font-size: 3.2vw; }
+  .live { top: 5vw; left: 5vw; }
+  .live__btn { font-size: 3.2vw; }
+  .nav { top: 5vw; }
+  .nav__btn { font-size: 3.2vw; }
+  .nav__list {
+    top: 10vw;
+    flex-wrap: wrap;
+    gap: 3vw 4vw;
+    max-width: 92vw;
+    padding: 1.5vw 0 0;
+  }
+  .nav__list a { font-size: 4.4vw; }
+
+
+  .gallery { padding-top: 20vw; }
+  .gallery__grid { column-count: 2; column-gap: 6px; padding: 0 6px; }
+  .gallery--grid .gallery__grid { column-count: 2; }
+  .gallery__grid img { margin-bottom: 6px; }
+  .gallery__nav { padding: 3.5vw 5vw; font-size: 2.8vw; }
+  .gallery__top { margin-bottom: 1.8vw; }
+
+  .lightbox img { max-width: 94vw; max-height: 84vh; }
+  .lightbox__close { top: 5vw; right: 6vw; width: 6vw; height: 6vw; }
+
+
+
+
+
+
+
+}
+
+
+/* ---------- Duplicate chrome (left menu) ---------- */
+.dupe__nav {
+  position: fixed;
+  top: 1.5vw;
+  left: 1.5vw;
+  z-index: 80;
+  width: auto;
+  max-width: 16.5vw;
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  font-weight: 400;
+  color: #000;
+}
+
+.dupe__nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dupe__nav li { margin: 0; }
+
+.dupe__nav a {
+  display: block;
+  font-size: 1.2vw;
+  line-height: 1.52;
+  color: #000;
+  text-decoration: none;
+}
+
+.dupe__nav a:hover { opacity: .55; }
+
+/* Three empty rows between "last sunny day" and the rest */
+.dupe__nav li:first-child a { margin-bottom: 4.56em; }
+
+.dupe__nav a.is-current { opacity: 1; }
+
+.dupe__nav a.dupe__live {
+  display: inline;
+  border-bottom: none;
+  padding-bottom: 0;
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+  text-underline-offset: 0.08em;
+  text-decoration-thickness: 1px;
+}
+
+.dupe__stage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3vh 9vw 3vh 18.5vw;
+}
+
+.dupe__stage .header__still {
+  width: 100%;
+  max-width: min(62vw, 94vh);
+  margin: 0;
+}
+
+.dupe__page {
+  padding: 0 18.5vw 8vw 18.5vw;
+}
+
+.dupe__page .prose,
+.dupe__page .cast,
+.dupe__page .soundtrack,
+.dupe__page .refs {
+  width: auto;
+  margin-left: 0;
+}
+
+.dupe__page .prose p,
+.dupe__page .header__logline {
+  max-width: none;
+}
+
+.dupe__page .header {
+  padding-top: 9vw;
+}
+
+.dupe__page .header__logline {
+  margin-left: 0;
+}
+
+.dupe__page .gallery {
+  padding-top: 9vw;
+}
+
+.dupe__page.dupe__page--gallery {
+  padding-bottom: 0;
+}
+
+.dupe__page--gallery .gallery__nav {
+  margin: 0 -18.5vw;
+  padding: 1.1vw 18.5vw;
+  background: #fff;
+  color: #000;
+}
+
+.dupe__page--gallery .gallery__nav button,
+.dupe__page--gallery .gallery__nav a {
+  color: #000;
+}
+
+.dupe__page--gallery .gallery__grid {
+  margin-bottom: 0;
+}
+
+.dupe__page--gallery .gallery__grid img:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 767px) {
+  .dupe__nav {
+    position: static;
+    width: auto;
+    padding: 6vw 8vw 2vw;
+  }
+  .dupe__nav a { font-size: 3.8vw; line-height: 1.52; }
+  .dupe__stage { padding: 4vw 8vw 10vw; min-height: auto; }
+  .dupe__stage .header__still { max-width: 100%; }
+  .dupe__page { padding: 0; }
+  .dupe__page .header { padding-top: 0; }
+  .dupe__page--gallery .gallery__nav {
+    margin: 0;
+    padding: 3.5vw 5vw;
+  }
+}

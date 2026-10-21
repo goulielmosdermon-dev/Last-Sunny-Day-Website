@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Greek Elvis — Last Sunny Day</title>
+<link rel="stylesheet" href="../lsd.css?v=7">
+
+</head>
+<body>
+<nav class="dupe__nav">
+  <ul>
+    <li><a href="/">last sunny day</a></li>
+    <li><a href="/logline">logline</a></li>
+    <li><a href="/makeitpersonal">make it personal</a></li>
+    <li><a href="/inspiration">inspiration</a></li>
+    <li><a href="/actors">cast</a></li>
+    <li><a href="/greekelvis" class="is-current">greek elvis</a></li>
+    <li><a href="/soundtrack">soundtrack</a></li>
+    <li><a href="/gallery">gallery</a></li>
+    <li><a href="/references">references</a></li>
+    <li><a class="dupe__live" href="/info">live updates</a></li>
+  </ul>
+</nav>
+<div class="score" id="score">
+  <button class="score__btn" type="button" aria-label="Play soundtrack">
+    <span class="score__icon"></span>
+    <span>Soundtrack</span>
+  </button>
+  <audio id="score-audio" preload="none"></audio>
+</div>
+<main class="dupe__page">
+<section class="elvis" id="greek-elvis">
+  <div class="elvis__stage">
+    <iframe
+      id="elvis-player"
+      loading="lazy"
+      src="https://player.vimeo.com/video/1180606477?h=c2d261d2a1&amp;controls=0&amp;title=0&amp;byline=0&amp;portrait=0&amp;playsinline=1&amp;dnt=1"
+      title="Greek Elvis"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen></iframe>
+
+    <button class="elvis__watch" type="button" aria-label="Play Greek Elvis">Watch Greek Elvis</button>
+
+    <div class="elvis__controls">
+      <button class="elvis__toggle" type="button" aria-label="Play / pause"></button>
+      <div class="elvis__track">
+        <span class="elvis__progress"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</main>
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+(function () {
+  var section  = document.getElementById('greek-elvis');
+  var player   = new Vimeo.Player(document.getElementById('elvis-player'));
+  var watch    = section.querySelector('.elvis__watch');
+  var toggle   = section.querySelector('.elvis__toggle');
+  var track    = section.querySelector('.elvis__track');
+  var progress = section.querySelector('.elvis__progress');
+  var duration = 0;
+
+  player.getDuration().then(function (d) { duration = d; });
+
+  function play()  { player.play().catch(function () {}); }
+  function pause() { player.pause(); }
+
+  watch.addEventListener('click', play);
+  toggle.addEventListener('click', function () {
+    player.getPaused().then(function (paused) { paused ? play() : pause(); });
+  });
+
+  player.on('play',  function () { section.classList.add('is-playing'); });
+  player.on('pause', function () { section.classList.remove('is-playing'); });
+  player.on('ended', function () {
+    section.classList.remove('is-playing');
+    progress.style.width = '0';
+  });
+
+  player.on('timeupdate', function (data) {
+    progress.style.width = (data.percent * 100) + '%';
+  });
+
+  track.addEventListener('click', function (e) {
+    if (!duration) return;
+    var box = track.getBoundingClientRect();
+    var pct = Math.min(Math.max((e.clientX - box.left) / box.width, 0), 1);
+    player.setCurrentTime(pct * duration);
+  });
+})();
+</script>
+
+
+<script src="../lsd.js"></script>
+</body>
+</html>
