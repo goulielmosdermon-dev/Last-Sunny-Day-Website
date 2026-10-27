@@ -276,6 +276,24 @@ img { display: block; max-width: 100%; height: auto; }
 
 .cast__member.is-open .cast__bio { display: block; }
 
+.cast--team .cast__meta {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .4em;
+}
+
+.cast--team .cast__name {
+  cursor: default;
+}
+
+.cast__credit {
+  margin: 0;
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  font-size: 1.05vw;
+  line-height: 1.3;
+  color: #000;
+}
+
 
 /* ---------- Greek Elvis ---------- */
 .elvis { margin-top: 9vw; }
@@ -879,6 +897,7 @@ img { display: block; max-width: 100%; height: auto; }
   .cast__meta { margin-top: 4vw; }
   .cast__name { font-size: 4.4vw; }
   .cast__attached { font-size: 4vw; }
+  .cast__credit { font-size: 4.4vw; }
   .cast__bio { margin-top: 4vw; }
   .cast__bio p { font-size: 4.4vw; }
 
