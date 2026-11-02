@@ -240,6 +240,8 @@ img { display: block; max-width: 100%; height: auto; }
   color: #000;
 }
 
+span.cast__name { cursor: default; }
+
 .cast__plus {
   font-size: 1.05em;
   line-height: 1;

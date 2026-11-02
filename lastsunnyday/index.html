@@ -38,7 +38,7 @@
   <p class="header__logline">
     On a sun-scorched Greek island, two Sicilian hitmen on a mission
     are forced to face their violent past and uncertain future when
-    they cross paths with a woman with a vendetta of her own.
+    they cross paths with a young prostitute with a vendetta of her own.
   </p>
 
   <div class="header__still">
@@ -155,6 +155,15 @@
     </div>
     <div class="cast__bio" id="bio-anna">
       <p>Female, early 20s, Greek. A survivor forged in captivity. Anna is quiet but not weak. Beneath her silence is a storm of rage, grief, and defiant will. Once trafficked, now escaped, she moves like a ghost reclaiming her own story. Her presence disrupts everything. She is the moral center of the film&mdash;a mirror to the men&rsquo;s brutality, and a force with more to lose, and more courage to act.</p>
+    </div>
+  </article>
+
+  <article class="cast__member">
+    <img class="cast__portrait" src="/Last Sunny Day_files/Cast/Lydia.jpg" alt="">
+    <div class="cast__meta">
+      <h2 class="cast__role">
+        <span class="cast__name">Lydia</span>
+      </h2>
     </div>
   </article>
 
@@ -846,6 +855,7 @@
   }
 
   Array.prototype.forEach.call(members, function (member) {
+    if (!member.querySelector('.cast__plus')) return;
     Array.prototype.forEach.call(member.querySelectorAll('.cast__photo, .cast__name'), function (btn) {
       btn.addEventListener('click', function () {
         var willOpen = !member.classList.contains('is-open');
