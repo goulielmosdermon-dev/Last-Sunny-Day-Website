@@ -463,7 +463,7 @@ body {
 <script>
 (function () {
   var KEY = 'lsd-finance-v1';
-  var TYPES = ['DG', 'MG', 'Grant', 'Equity', 'Tax Incentive', 'Loan', 'Presale', 'Gap'];
+  var TYPES = ['MG', 'Grant', 'Equity', 'Tax Incentive', 'Loan', 'Presale', 'Gap'];
 
   function uid() {
     return 'r' + Math.random().toString(36).slice(2, 9);
@@ -471,26 +471,26 @@ body {
 
   function defaults() {
     return {
-      budget: 850000,
+      version: 3,
+      budget: 900000,
       sections: [
         {
           id: 'marketplace',
           title: 'Marketplace',
           rows: [
-            { id: 'm1', confirmed: false, source: 'Greek Distributor', type: 'DG', amount: 20000 },
-            { id: 'm2', confirmed: false, source: 'Italian Distributor', type: 'MG', amount: 20000 }
+            { id: 'm1', confirmed: false, source: 'Greek Distributor', type: 'MG', amount: 10000 },
+            { id: 'm2', confirmed: false, source: 'Italian Distributor', type: 'MG', amount: 10000 }
           ]
         },
         {
           id: 'equity',
-          title: 'Equity Investors',
-          note: 'Name of company/individual',
+          title: 'Funding Sources',
           rows: [
             { id: 'e1', confirmed: true, source: 'Greece Cash Rebate 40%', type: 'Tax Incentive', amount: 0, auto: 'rebate' },
-            { id: 'e2', confirmed: false, source: 'EKKOMED Grant', type: 'Grant', amount: 320000 },
-            { id: 'e3', confirmed: true, source: 'Producer Contribution', type: 'Equity', amount: 10000 },
-            { id: 'e4', confirmed: false, source: 'Private Investor', type: 'Grant', amount: 250000 },
-            { id: 'e5', confirmed: false, source: 'Private Investor', type: 'Equity', amount: 250000 }
+            { id: 'e2', confirmed: false, source: 'EKKOMED Grant', type: 'Grant', amount: 100000 },
+            { id: 'e3', confirmed: true, source: 'Producer', type: 'Equity', amount: 15000 },
+            { id: 'e4', confirmed: false, source: 'Private Investor 1', type: 'Equity', amount: 202500 },
+            { id: 'e5', confirmed: false, source: 'Private Investor 2', type: 'Equity', amount: 202500 }
           ]
         }
       ]
@@ -578,6 +578,55 @@ body {
           return next;
         });
       });
+      if (!data.version || data.version < 2) {
+        var investor = null;
+        var otherFunding = 0;
+        data.sections.forEach(function (section) {
+          if (section.id === 'equity') {
+            section.title = 'Funding Sources';
+            delete section.note;
+            section.rows = section.rows.filter(function (row) { return row.id !== 'e5'; });
+          }
+          section.rows.forEach(function (row) {
+            if (row.id === 'e4') investor = row;
+            else otherFunding += isRebate(row)
+              ? Math.round(data.budget * rebateRate(row)) : row.amount;
+          });
+        });
+        if (investor) investor.amount = Math.max(0, data.budget - otherFunding);
+        data.version = 2;
+      }
+      if (data.version < 3) {
+        var investorSection = null;
+        var firstInvestor = null;
+        var otherFunding = 0;
+        data.sections.forEach(function (section) {
+          section.rows.forEach(function (row) {
+            if (row.id === 'm1' || row.id === 'm2') {
+              row.amount = 10000;
+              row.type = 'MG';
+            }
+            if (row.id === 'e4') {
+              investorSection = section;
+              firstInvestor = row;
+            } else {
+              otherFunding += isRebate(row)
+                ? Math.round(data.budget * rebateRate(row)) : row.amount;
+            }
+          });
+        });
+        if (firstInvestor) {
+          var remaining = Math.max(0, data.budget - otherFunding);
+          firstInvestor.source = 'Private Investor 1';
+          firstInvestor.type = 'Equity';
+          firstInvestor.amount = Math.floor(remaining / 2);
+          investorSection.rows.push({
+            id: 'e5', confirmed: false, source: 'Private Investor 2',
+            type: 'Equity', amount: remaining - firstInvestor.amount
+          });
+        }
+        data.version = 3;
+      }
       return data;
     } catch (err) {
       return defaults();
