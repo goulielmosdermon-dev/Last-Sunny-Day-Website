@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synopses — Last Sunny Day</title>
+<link rel="stylesheet" href="../lsd.css?v=9">
+
+</head>
+<body>
+<nav class="dupe__nav">
+  <ul>
+    <li><a href="/">last sunny day</a></li>
+    <li><a href="/logline">logline</a></li>
+    <li><a href="/synopses" class="is-current" aria-current="page">synopses</a></li>
+    <li><a href="/makeitpersonal">make it personal</a></li>
+    <li><a href="/inspiration">inspiration</a></li>
+    <li><a href="/actors">cast</a></li>
+    <li><a href="/greekelvis">greek elvis</a></li>
+    <li><a href="/soundtrack">soundtrack</a></li>
+    <li><a href="/gallery">mood</a></li>
+    <li><a href="/references">references</a></li>
+    <li><a href="/team">team</a></li>
+    <li><a class="dupe__live" href="/info">live updates</a></li>
+  </ul>
+</nav>
+<div class="score" id="score">
+  <button class="score__btn" type="button" aria-label="Play soundtrack">
+    <span class="score__icon"></span>
+    <span>Soundtrack</span>
+  </button>
+  <audio id="score-audio" preload="none"></audio>
+</div>
+<main class="dupe__page">
+<section class="prose">
+  <h1 class="prose__heading">LAST SUNNY DAY</h1>
+  <h2 class="prose__heading">Beginning</h2>
+  <p>Oliver and Giorgio have been brothers since they were kids in Sicily. Not by blood, by everything else. Both became men the day they brought a dead chicken to Frank, the old gravedigger who turned them into killers. Fifty two bodies later, here they are.</p>
+  <p>Sunrise on a ferry. Two guys in cheap black suits and sunglasses, heading to a Greek island neither has ever seen. An old man asks if they're going to a funeral. Something like that.</p>
+  <p>The job is easy. A traitor on a rotting boat. They shoot him and drag him to the hearse, arguing about Spanish food and Italian dicks the whole way. This is their normal.</p>
+  <p>But Oliver wants out. He paces the motel room practicing how to tell Giorgio and can't get past the first sentence.</p>
+  <p>Frank gives them one last errand. Pick up a dead dancer named Anna from a strip club run by a coked up guy who performs as Elvis. Hiding in a closet, her 15 year old daughter Lydia watches them carry her mother away.</p>
+</section>
+<section class="prose">
+  <h2 class="prose__heading">Middle</h2>
+  <p>It's 40 degrees and Giorgio wants a swim. They strip to their underwear, wrestle in the waves like teenagers, and come back to find the hearse gone. Lydia followed them on her pink bicycle and stole it.</p>
+  <p>The day turns into a fever dream. Lydia shoots at them at a gas station. The attendant ends up dead. A rookie cop questions Oliver, who calls himself Lorenzo Margaretti, and Giorgio blows the cop's head off.</p>
+  <p>Barefoot and burning, Oliver slips into a little stone church and makes a deal with God. No more killing. Break it and he goes straight to hell.</p>
+  <p>In a stolen villa, Giorgio tries on Ferragamo suits like he's James Bond. Oliver finally says it. I'm done, brother. Giorgio walks out and goes back to Frank, who gives him one order. Take Oliver out.</p>
+  <p>Lydia finds Oliver on the side of the road. They barely share a language, but he helps her push her mother's coffin off a cliff into the sea. On the sand she teaches him a Greek poem her mother used to read her. Sweet is life, and death is darkness.</p>
+</section>
+<section class="prose">
+  <h2 class="prose__heading">End</h2>
+  <p>Giorgio comes to the motel and points his gun at Oliver. Then lowers it. Don't worry about Frank, he says. Frank is dead. He chose his brother.</p>
+  <p>That night Oliver goes backstage and shoots Greek Elvis, the man who used Lydia's mother and was grooming her next. Lydia puts the real Elvis on the TV and tells him he's not a hair on Elvis's ass. Oliver finishes him. His promise to God is broken.</p>
+  <p>In the hallway the bodyguard's shotgun is waiting. Oliver takes the blast. Giorgio takes the bodyguard.</p>
+  <p>At dawn they sit on a cliff and watch one last sunrise. Oliver says dying is like a beautiful film going black right when you want to see what happens next.</p>
+  <p>I'll see you in hell, brother.</p>
+</section>
+</main>
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Split body copy into lines ---- */
+  var bodyCopy = document.querySelectorAll(
+    '.header__logline, .prose p'
+  );
+
+  function splitLines(el) {
+    if (el.dataset.html === undefined) el.dataset.html = el.innerHTML;
+    el.innerHTML = el.dataset.html;
+
+    // Wrap every word so we can measure where the browser broke each line.
+    var nodes = Array.prototype.slice.call(el.childNodes);
+    var flat = document.createDocumentFragment();
+
+    nodes.forEach(function (node) {
+      if (node.nodeType === 3) {
+        node.textContent.split(/(\s+)/).forEach(function (chunk) {
+          if (!chunk) return;
+          if (/^\s+$/.test(chunk)) {
+            flat.appendChild(document.createTextNode(' '));
+          } else {
+            var w = document.createElement('span');
+            w.className = 'w';
+            w.textContent = chunk;
+            flat.appendChild(w);
+          }
+        });
+      } else {
+        flat.appendChild(node.cloneNode(true));
+      }
+    });
+
+    el.innerHTML = '';
+    el.appendChild(flat);
+
+    // Group words by their vertical offset, then wrap each group as a line.
+    var kids = Array.prototype.slice.call(el.childNodes);
+    var lines = [];
+    var current = [];
+    var lastTop = null;
+
+    kids.forEach(function (node) {
+      if (node.nodeType === 1 && node.tagName === 'BR') {
+        lines.push(current); current = []; lastTop = null;
+        return;
+      }
+      if (node.nodeType === 1 && node.classList.contains('w')) {
+        var top = node.offsetTop;
+        if (lastTop !== null && top > lastTop) {
+          lines.push(current); current = [];
+        }
+        lastTop = top;
+      }
+      current.push(node);
+    });
+    if (current.length) lines.push(current);
+
+    el.innerHTML = '';
+    lines.forEach(function (group) {
+      if (!group.length) return;
+      var line  = document.createElement('span');
+      var inner = document.createElement('span');
+      line.className = 'ln';
+      inner.className = 'ln__i';
+      group.forEach(function (n) { inner.appendChild(n); });
+      line.appendChild(inner);
+      el.appendChild(line);
+    });
+
+    Array.prototype.forEach.call(el.querySelectorAll('.ln__i'), function (i, idx) {
+      i.style.transitionDelay = (idx * 0.06) + 's';
+    });
+  }
+
+  if (!reduced) Array.prototype.forEach.call(bodyCopy, splitLines);
+
+  /* ---- Headings fade in ---- */
+  var headings = document.querySelectorAll(
+    '.prose__heading, .soundtrack__heading, .refs__heading, .cast__portrait'
+  );
+  Array.prototype.forEach.call(headings, function (h) { h.classList.add('reveal'); });
+
+  /* ---- Observe everything ---- */
+  var targets = []
+    .concat(Array.prototype.slice.call(headings))
+    .concat(Array.prototype.slice.call(bodyCopy))
+    .concat(Array.prototype.slice.call(document.querySelectorAll('.gallery__grid img')));
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-inview');
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+
+    targets.forEach(function (t) { io.observe(t); });
+  } else {
+    targets.forEach(function (t) { t.classList.add('is-inview'); });
+  }
+
+  /* ---- Re-split lines on resize ---- */
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    if (reduced) return;
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      Array.prototype.forEach.call(bodyCopy, function (el) {
+        var seen = el.classList.contains('is-inview');
+        splitLines(el);
+        if (seen) el.classList.add('is-inview');
+      });
+    }, 200);
+  });
+
+  /* ---- Lightbox ---- */
+  var box   = document.getElementById('lightbox');
+  if (!box) return;
+  var boxImg = box.querySelector('img');
+  var close = box.querySelector('.lightbox__close');
+  var lastFocus = null;
+
+  function open(src, alt) {
+    lastFocus = document.activeElement;
+    boxImg.src = src;
+    boxImg.alt = alt || '';
+    box.hidden = false;
+    requestAnimationFrame(function () { box.classList.add('is-open'); });
+    document.body.style.overflow = 'hidden';
+    close.focus();
+  }
+
+  function shut() {
+    box.classList.remove('is-open');
+    document.body.style.overflow = '';
+    setTimeout(function () {
+      box.hidden = true;
+      boxImg.removeAttribute('src');
+    }, 350);
+    if (lastFocus) lastFocus.focus();
+  }
+
+  document.querySelector('.gallery__grid').addEventListener('click', function (e) {
+    var img = e.target.closest('img');
+    if (!img) return;
+    if (document.getElementById('gallery').classList.contains('gallery--full')) return;
+    open(img.currentSrc || img.src, img.alt);
+  });
+
+  close.addEventListener('click', shut);
+  box.addEventListener('click', function (e) { if (e.target === box) shut(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && box.classList.contains('is-open')) shut();
+  });
+})();
+</script>
+<script src="../lsd.js?v=9"></script>
+</body>
+</html>
