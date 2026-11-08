@@ -1,4 +1,32 @@
 (function () {
+  function closeMenu() {
+    var nav = document.querySelector('.dupe__nav');
+    if (!nav) return;
+    nav.classList.remove('is-open');
+    var button = nav.querySelector('.mobile-menu-toggle');
+    if (button) { button.setAttribute('aria-expanded', 'false'); button.textContent = 'Menu'; }
+  }
+  document.addEventListener('click', function (event) {
+    var button = event.target.closest('.mobile-menu-toggle');
+    if (button) {
+      var nav = button.closest('.dupe__nav');
+      var open = nav.classList.toggle('is-open');
+      button.setAttribute('aria-expanded', String(open));
+      button.textContent = open ? 'Close' : 'Menu';
+    } else if (event.target.closest('.dupe__nav a') || !event.target.closest('.dupe__nav')) {
+      closeMenu();
+    }
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      var button = document.querySelector('.dupe__nav.is-open .mobile-menu-toggle');
+      closeMenu();
+      if (button) button.focus();
+    }
+  });
+})();
+
+(function () {
   var wrap = document.getElementById('score');
   var btn = wrap && wrap.querySelector('.score__btn');
   var audio = document.getElementById('score-audio');

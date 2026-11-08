@@ -4,12 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>References — Last Sunny Day</title>
-<link rel="stylesheet" href="../lsd.css?v=9">
+<link rel="stylesheet" href="../lsd.css?v=10">
 
 </head>
 <body>
-<nav class="dupe__nav">
-  <ul>
+<nav class="dupe__nav" aria-label="Main navigation">
+  <a class="mobile-brand" href="/">last sunny day</a>
+  <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">Menu</button>
+  <ul id="site-menu">
     <li><a href="/">last sunny day</a></li>
     <li><a href="/logline">logline</a></li>
     <li><a href="/synopses">synopses</a></li>
@@ -344,6 +346,6 @@
   });
 })();
 </script>
-<script src="../lsd.js?v=9"></script>
+<script src="../lsd.js?v=10"></script>
 </body>
 </html>
