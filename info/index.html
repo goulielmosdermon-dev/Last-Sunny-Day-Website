@@ -471,7 +471,7 @@ body {
 
   function defaults() {
     return {
-      version: 3,
+      version: 4,
       budget: 900000,
       sections: [
         {
@@ -486,11 +486,11 @@ body {
           id: 'equity',
           title: 'Funding Sources',
           rows: [
-            { id: 'e1', confirmed: true, source: 'Greece Cash Rebate 40%', type: 'Tax Incentive', amount: 0, auto: 'rebate' },
+            { id: 'e1', confirmed: true, source: 'Greece Cash Rebate 40% of 80% of budget', type: 'Tax Incentive', amount: 0, auto: 'rebate' },
             { id: 'e2', confirmed: false, source: 'EKKOMED Grant', type: 'Grant', amount: 100000 },
             { id: 'e3', confirmed: true, source: 'Producer', type: 'Equity', amount: 15000 },
-            { id: 'e4', confirmed: false, source: 'Private Investor 1', type: 'Equity', amount: 202500 },
-            { id: 'e5', confirmed: false, source: 'Private Investor 2', type: 'Equity', amount: 202500 }
+            { id: 'e4', confirmed: false, source: 'Private Investor 1', type: 'Equity', amount: 238500 },
+            { id: 'e5', confirmed: false, source: 'Private Investor 2', type: 'Equity', amount: 238500 }
           ]
         }
       ]
@@ -552,7 +552,7 @@ body {
       section.rows.forEach(function (row) {
         if (!isRebate(row)) return;
         row.auto = 'rebate';
-        row.amount = Math.round(state.budget * rebateRate(row));
+        row.amount = Math.round(state.budget * 0.8 * rebateRate(row));
       });
     });
   }
@@ -590,7 +590,7 @@ body {
           section.rows.forEach(function (row) {
             if (row.id === 'e4') investor = row;
             else otherFunding += isRebate(row)
-              ? Math.round(data.budget * rebateRate(row)) : row.amount;
+              ? Math.round(data.budget * 0.8 * rebateRate(row)) : row.amount;
           });
         });
         if (investor) investor.amount = Math.max(0, data.budget - otherFunding);
@@ -611,7 +611,7 @@ body {
               firstInvestor = row;
             } else {
               otherFunding += isRebate(row)
-                ? Math.round(data.budget * rebateRate(row)) : row.amount;
+                ? Math.round(data.budget * 0.8 * rebateRate(row)) : row.amount;
             }
           });
         });
@@ -626,6 +626,26 @@ body {
           });
         }
         data.version = 3;
+      }
+      if (data.version < 4) {
+        var investors = [];
+        var committedFunding = 0;
+        data.sections.forEach(function (section) {
+          section.rows.forEach(function (row) {
+            if (isRebate(row)) {
+              if (row.id === 'e1') row.source = 'Greece Cash Rebate 40% of 80% of budget';
+              row.amount = Math.round(data.budget * 0.8 * rebateRate(row));
+            }
+            if (row.id === 'e4' || row.id === 'e5') investors.push(row);
+            else committedFunding += row.amount;
+          });
+        });
+        if (investors.length === 2) {
+          var remainingFunding = Math.max(0, data.budget - committedFunding);
+          investors[0].amount = Math.floor(remainingFunding / 2);
+          investors[1].amount = remainingFunding - investors[0].amount;
+        }
+        data.version = 4;
       }
       return data;
     } catch (err) {
@@ -709,7 +729,7 @@ body {
             '<td>' + typeSelect(row.type) + '</td>' +
             '<td class="num">' +
               (auto
-                ? '<input data-field="amount" data-auto="rebate" readonly tabindex="-1" aria-label="Amount, 40% of total budget" value="' + escapeAttr(formatMoney(row.amount)) + '">'
+                ? '<input data-field="amount" data-auto="rebate" readonly tabindex="-1" aria-label="Amount, 40% of 80% of total budget" value="' + escapeAttr(formatMoney(row.amount)) + '">'
                 : '<input data-field="amount" inputmode="decimal" aria-label="Amount" value="' + escapeAttr(formatMoney(row.amount)) + '">') +
             '</td>' +
             '<td class="num" data-pct></td>' +
