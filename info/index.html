@@ -486,7 +486,7 @@ body {
           id: 'equity',
           title: 'Funding Sources',
           rows: [
-            { id: 'e1', confirmed: true, source: 'Greece Cash Rebate 40% of 80% of budget', type: 'Tax Incentive', amount: 0, auto: 'rebate' },
+            { id: 'e1', confirmed: true, source: 'Greece Cash Rebate', type: 'Tax Incentive', amount: 0, auto: 'rebate' },
             { id: 'e2', confirmed: false, source: 'EKKOMED Grant', type: 'Grant', amount: 100000 },
             { id: 'e3', confirmed: true, source: 'Producer', type: 'Equity', amount: 15000 },
             { id: 'e4', confirmed: false, source: 'Private Investor 1', type: 'Equity', amount: 238500 },
@@ -570,7 +570,7 @@ body {
           var next = {
             id: row.id || uid(),
             confirmed: !!row.confirmed,
-            source: row.source || '',
+            source: row.source === 'Greece Cash Rebate 40% of 80% of budget' ? 'Greece Cash Rebate' : (row.source || ''),
             type: row.type || 'Grant',
             amount: parseMoney(row.amount)
           };
@@ -633,7 +633,7 @@ body {
         data.sections.forEach(function (section) {
           section.rows.forEach(function (row) {
             if (isRebate(row)) {
-              if (row.id === 'e1') row.source = 'Greece Cash Rebate 40% of 80% of budget';
+              if (row.id === 'e1') row.source = 'Greece Cash Rebate';
               row.amount = Math.round(data.budget * 0.8 * rebateRate(row));
             }
             if (row.id === 'e4' || row.id === 'e5') investors.push(row);
@@ -729,7 +729,7 @@ body {
             '<td>' + typeSelect(row.type) + '</td>' +
             '<td class="num">' +
               (auto
-                ? '<input data-field="amount" data-auto="rebate" readonly tabindex="-1" aria-label="Amount, 40% of 80% of total budget" value="' + escapeAttr(formatMoney(row.amount)) + '">'
+                ? '<input data-field="amount" data-auto="rebate" readonly tabindex="-1" aria-label="Cash rebate amount" value="' + escapeAttr(formatMoney(row.amount)) + '">'
                 : '<input data-field="amount" inputmode="decimal" aria-label="Amount" value="' + escapeAttr(formatMoney(row.amount)) + '">') +
             '</td>' +
             '<td class="num" data-pct></td>' +
