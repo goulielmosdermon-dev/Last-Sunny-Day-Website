@@ -471,7 +471,7 @@ body {
 
   function defaults() {
     return {
-      version: 4,
+      version: 5,
       budget: 900000,
       sections: [
         {
@@ -646,6 +646,24 @@ body {
           investors[1].amount = remainingFunding - investors[0].amount;
         }
         data.version = 4;
+      }
+      if (data.version < 5) {
+        data.budget = 900000;
+        var privateInvestors = [];
+        var otherSources = 0;
+        data.sections.forEach(function (section) {
+          section.rows.forEach(function (row) {
+            if (isRebate(row)) row.amount = Math.round(data.budget * 0.8 * rebateRate(row));
+            if (row.id === 'e4' || row.id === 'e5') privateInvestors.push(row);
+            else otherSources += row.amount;
+          });
+        });
+        if (privateInvestors.length === 2) {
+          var gap = Math.max(0, data.budget - otherSources);
+          privateInvestors[0].amount = Math.floor(gap / 2);
+          privateInvestors[1].amount = gap - privateInvestors[0].amount;
+        }
+        data.version = 5;
       }
       return data;
     } catch (err) {
@@ -822,7 +840,7 @@ body {
     }
 
     meta.innerHTML =
-      '<span>Confirmed <b>' + formatMoney(confirmed) + '</b></span>' +
+      '<span>Secured <b>' + formatMoney(confirmed) + ' (' + formatPct(confirmed, budget) + ')</b></span>' +
       '<span>In discussion <b>' + formatMoney(grand - confirmed) + '</b></span>' +
       '<span>Covered <b>' + formatPct(grand, budget) + '</b></span>';
 
