@@ -356,6 +356,13 @@ body {
   font-weight: 400;
 }
 
+.plan-note {
+  margin: 1.4vw 0 0;
+  font-family: "Daito Body", "Times New Roman", Times, serif;
+  font-size: 1.05vw;
+  line-height: 1.4;
+}
+
 .footer-space { height: 12vw; }
 
 /* Text appears without animation */
@@ -406,6 +413,10 @@ body {
     margin: 6vw 0 0;
     font-size: 3.6vw;
     gap: 3vw 5vw;
+  }
+  .plan-note {
+    margin-top: 4vw;
+    font-size: 3.6vw;
   }
   .footer-space { height: 20vw; }
 }
@@ -466,6 +477,7 @@ body {
     </table>
   </div>
   <div class="plan-meta" id="plan-meta" aria-live="polite"></div>
+  <p class="plan-note">Sales agent: to be attached (no MG assumed).</p>
 </section>
 
 <div class="footer-space"></div>
@@ -473,7 +485,7 @@ body {
 <script>
 (function () {
   var KEY = 'lsd-finance-v1';
-  var TYPES = ['MG', 'Grant', 'Equity', 'Tax Incentive', 'Loan', 'Presale', 'Gap'];
+  var TYPES = ['Grant', 'Equity', 'Tax Incentive', 'In-kind', 'Co-production', 'Co-production / Grant', 'Soft loan', 'Loan', 'MG', 'Presale', 'Gap'];
 
   function uid() {
     return 'r' + Math.random().toString(36).slice(2, 9);
@@ -481,26 +493,21 @@ body {
 
   function defaults() {
     return {
-      version: 5,
+      version: 11,
       budget: 900000,
       sections: [
-        {
-          id: 'marketplace',
-          title: 'Marketplace',
-          rows: [
-            { id: 'm1', confirmed: false, source: 'Greek Distributor', type: 'MG', amount: 10000 },
-            { id: 'm2', confirmed: false, source: 'Italian Distributor', type: 'MG', amount: 10000 }
-          ]
-        },
         {
           id: 'equity',
           title: 'Funding Sources',
           rows: [
+            { id: 'e7', confirmed: true, source: 'Fee Deferrals & In-kind', type: 'In-kind', amount: 40000 },
+            { id: 'e2', confirmed: false, source: 'EKKOMED First Feature Grant', type: 'Grant', amount: 250000 },
             { id: 'e1', confirmed: true, source: 'Greece Cash Rebate', type: 'Tax Incentive', amount: 0, auto: 'rebate' },
-            { id: 'e2', confirmed: false, source: 'EKKOMED Grant', type: 'Grant', amount: 100000 },
-            { id: 'e3', confirmed: true, source: 'Producer', type: 'Equity', amount: 15000 },
-            { id: 'e4', confirmed: false, source: 'Private Investor 1', type: 'Equity', amount: 238500 },
-            { id: 'e5', confirmed: false, source: 'Private Investor 2', type: 'Equity', amount: 238500 }
+            { id: 'e6', confirmed: false, source: 'Italian Co-producer (tax credit + regional fund)', type: 'Co-production', amount: 120000 },
+            { id: 'e8', confirmed: false, source: 'UK Co-producer / UK Global Screen Fund', type: 'Co-production / Grant', amount: 50000 },
+            { id: 'e9', confirmed: false, source: 'Eurimages', type: 'Soft loan', amount: 60000 },
+            { id: 'e4', confirmed: false, source: 'Private Investor A', type: 'Equity', amount: 72000 },
+            { id: 'e3', confirmed: true, source: 'Private Investor B', type: 'Equity', amount: 20000 }
           ]
         }
       ]
@@ -674,6 +681,85 @@ body {
           privateInvestors[1].amount = gap - privateInvestors[0].amount;
         }
         data.version = 5;
+      }
+      if (data.version < 6) {
+        var moved = 0;
+        data.sections = data.sections.filter(function (section) {
+          if (section.id === 'marketplace' || /^marketplace$/i.test(section.title || '')) {
+            (section.rows || []).forEach(function (row) { moved += parseMoney(row.amount); });
+            return false;
+          }
+          return true;
+        });
+        data.sections.forEach(function (section) {
+          section.rows = (section.rows || []).filter(function (row) {
+            var isMgRow = row.id === 'm1' || row.id === 'm2' || row.type === 'MG' ||
+              /greek distributor|italian distributor/i.test(row.source || '');
+            if (isMgRow) {
+              moved += parseMoney(row.amount);
+              return false;
+            }
+            return true;
+          });
+        });
+        var funding = data.sections.filter(function (s) { return s.id === 'equity'; })[0];
+        if (funding) {
+          var hasMove = funding.rows.some(function (row) {
+            return row.id === 'e6' || /italian fund move/i.test(row.source || '');
+          });
+          if (!hasMove) {
+            var insertAt = 0;
+            funding.rows.forEach(function (row, i) {
+              if (isRebate(row)) insertAt = i + 1;
+            });
+            funding.rows.splice(insertAt, 0, {
+              id: 'e6',
+              confirmed: false,
+              source: 'Italian fund move',
+              type: 'Grant',
+              amount: moved || 20000
+            });
+          }
+        }
+        data.version = 6;
+      }
+      if (data.version < 7) {
+        var next = defaults();
+        data.budget = 900000;
+        data.sections = next.sections;
+        data.version = 7;
+      }
+      if (data.version < 8) {
+        data.sections.forEach(function (section) {
+          (section.rows || []).forEach(function (row) {
+            if (isRebate(row)) row.confirmed = true;
+          });
+        });
+        data.version = 8;
+      }
+      if (data.version < 9) {
+        var next = defaults();
+        data.budget = 900000;
+        data.sections = next.sections;
+        data.version = 9;
+      }
+      if (data.version < 10) {
+        data.sections.forEach(function (section) {
+          (section.rows || []).forEach(function (row) {
+            if (isRebate(row)) row.source = 'Greece Cash Rebate';
+          });
+        });
+        data.version = 10;
+      }
+      if (data.version < 11) {
+        data.sections.forEach(function (section) {
+          (section.rows || []).forEach(function (row) {
+            if (row.id === 'e7' || /fee deferrals/i.test(row.source || '')) {
+              row.source = 'Fee Deferrals & In-kind';
+            }
+          });
+        });
+        data.version = 11;
       }
       return data;
     } catch (err) {
