@@ -53,7 +53,8 @@ img { display: block; max-width: 100%; height: auto; }
   max-width: 1560px;
 }
 
-.header__still video {
+.header__still video,
+.header__still .header__poster {
   width: 100%;
   height: auto;
   display: block;
@@ -1039,9 +1040,15 @@ span.cast__name { cursor: default; }
 }
 
 .dupe__stage .header__still {
-  width: 100%;
+  width: fit-content;
   max-width: min(62vw, 94vh);
   margin: 0;
+}
+
+.dupe__stage .header__poster {
+  width: auto;
+  max-width: 100%;
+  max-height: 88vh;
 }
 
 .dupe__page {
